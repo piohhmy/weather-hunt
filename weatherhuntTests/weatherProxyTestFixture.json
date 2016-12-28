@@ -1,0 +1,46 @@
+[
+  {
+    "coordinates": {
+      "lat": "45.50",
+      "lng": "-122.60"
+    },
+    "daily_weather": {
+      "2016-12-16": {
+        "condition": "Increasing Clouds",
+        "high": 32,
+        "low": 16,
+        "unit": "Fahrenheit"
+      },
+      "2016-12-17": {
+        "condition": "Snow Likely",
+        "high": 31,
+        "low": 28,
+        "unit": "Fahrenheit"
+      },
+      "2016-12-18": {
+        "condition": "Chance Rain",
+        "high": 36,
+        "low": 31,
+        "unit": "Fahrenheit"
+      },
+      "2016-12-19": {
+        "condition": "Rain",
+        "high": 39,
+        "low": 38,
+        "unit": "Fahrenheit"
+      },
+      "2016-12-20": {
+        "condition": "Rain",
+        "high": 47,
+        "low": 37,
+        "unit": "Fahrenheit"
+      },
+      "2016-12-21": {
+        "condition": "Rain Likely",
+        "high": 43,
+        "low": 36,
+        "unit": "Fahrenheit"
+      }
+    }
+  }
+]
