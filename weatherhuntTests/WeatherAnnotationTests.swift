@@ -21,4 +21,5 @@ class WeatherAnnotationTests: XCTestCase {
         XCTAssert(annotation.title == "Snow")
         
     }
+    
 }
