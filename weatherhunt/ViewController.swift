@@ -59,6 +59,14 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if (touch.view as? MKAnnotationView) != nil {
+            print("Ignore tap on existing annotation")
+            return false
+        }
+        return true
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let weatherAnnotation = annotation as? WeatherAnnotation {
             let annotationIdentifier = "weather-annotation"

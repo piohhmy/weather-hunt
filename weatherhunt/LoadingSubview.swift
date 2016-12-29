@@ -20,6 +20,17 @@ class LoadingSubview : UIActivityIndicatorView {
         superview.addSubview(self)
     }
     
+    override func startAnimating() {
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        super.startAnimating()
+    }
+    
+    override func stopAnimating() {
+        UIApplication.shared.endIgnoringInteractionEvents()
+
+        super.stopAnimating()
+    }
+    
     required init(coder: NSCoder) {
         super.init(coder: coder)
     }
