@@ -119,4 +119,29 @@ class WeatherAnnotation: MKPointAnnotation {
         self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
         self.coordinate = weather.coordinate
     }
+    
+    func isOverlapping(other annotation: WeatherAnnotation, on mapView: MKMapView) -> Bool{
+        if let anView1 = mapView.view(for: self) {
+            if let anView2 = mapView.view(for: annotation) {
+                let annotationPoint1 = CGPoint.init(x: anView1.frame.midX, y: anView1.frame.midY)
+                let annotationPoint2 = CGPoint.init(x: anView2.frame.midX, y: anView2.frame.midY)
+                return isOverlapping(p1: annotationPoint1, p2: annotationPoint2) && anView1 != anView2
+            }
+        }
+        return false
+    }
+    
+    func isOverlapping(with point: CGPoint, on mapView: MKMapView) -> Bool {
+        if let anView = mapView.view(for: self) {
+            let annotationPoint = CGPoint.init(x: anView.frame.midX, y: anView.frame.midY)
+            return isOverlapping(p1: annotationPoint, p2: point)
+        }
+        return false
+    }
+    
+    func isOverlapping(p1: CGPoint, p2: CGPoint) -> Bool {
+        let dist: CGFloat =  hypot((p1.x - p2.x), (p1.y - p2.y))
+        return dist <= 20
+    }
+
 }

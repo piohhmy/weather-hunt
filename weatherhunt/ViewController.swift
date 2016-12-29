@@ -17,6 +17,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        mapView.isRotateEnabled = false
         self.setupTapRecognizer()
         self.loadingSubview = LoadingSubview(superview: self.view)
         //let portland = CLLocationCoordinate2D(latitude: 45.5, longitude: -122.6)
@@ -59,10 +60,32 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
     }
     
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let weatherAnnotations = mapView.annotations.flatMap({$0 as? WeatherAnnotation})
+        for targetAn: WeatherAnnotation in weatherAnnotations  {
+            for otherAn: WeatherAnnotation in weatherAnnotations {
+                if targetAn.isOverlapping(other: otherAn, on: mapView){
+                    mapView.removeAnnotation(otherAn)
+                }
+            }
+        }
+    }
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if (touch.view as? MKAnnotationView) != nil {
             print("Ignore tap on existing annotation")
             return false
+        }
+        else {
+            let p = touch.location(in: mapView)
+            for annotation: MKAnnotation in mapView.annotations {
+                if let weatherAnnotation = annotation as? WeatherAnnotation {
+                    if weatherAnnotation.isOverlapping(with: p, on: mapView) {
+                        print("Ignore tap nearby existing annotation")
+                        return false
+                    }
+                }
+            }
         }
         return true
     }
