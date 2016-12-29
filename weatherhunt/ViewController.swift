@@ -10,20 +10,16 @@ import UIKit
 import MapKit
 
 class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
-    @IBAction func touchRecognizer(_ sender: Any) {
-    }
-    @IBOutlet weak var mapView: MKMapView!
+    @IBAction func touchRecognizer(_ sender: Any) {}
+    @IBOutlet weak var  mapView: MKMapView!
+    var loadingSubview : LoadingSubview!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         self.setupTapRecognizer()
-        let portland = CLLocationCoordinate2D(latitude: 45.5, longitude: -122.6)
-        getWeatherFor(coord: portland) { err, json in
-            if let json = json {
-                print(json)
-            }
-        }
+        self.loadingSubview = LoadingSubview(superview: self.view)
+        //let portland = CLLocationCoordinate2D(latitude: 45.5, longitude: -122.6)
     }
     
     func setupTapRecognizer() {
@@ -33,12 +29,17 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     }
     
     func onReceiveForecast(err: String?, forecast: Forecast?) {
+        defer {
+            DispatchQueue.main.async {
+                self.loadingSubview.stopAnimating()
+            }
+        }
         if let forecast = forecast {
-            print(forecast)
             do {
                 let annotation = try WeatherAnnotation(fromDailyWeather: forecast.on(day: 0))
                 DispatchQueue.main.async {
-                     self.mapView.addAnnotation(annotation)
+                    self.mapView.addAnnotation(annotation)
+
                 }
             } catch ForecastError.NoWeatherAvailable{
                 print("No weather found")
@@ -46,7 +47,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
                 print("Error")
             }
         }
-        
     }
     
     
@@ -54,6 +54,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         if sender.state == .ended {
             let location = sender.location(in: mapView)
             let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
+            self.loadingSubview.startAnimating()
             getWeatherFor(coord: coordinate, completion: self.onReceiveForecast)
         }
     }
@@ -74,6 +75,5 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
         return nil
     }
-
 }
 
