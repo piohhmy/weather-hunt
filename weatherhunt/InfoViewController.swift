@@ -20,6 +20,14 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     }
 
     @IBAction func provideFeedback(_ sender: Any) {
+       setupMailView()
+    }
+    
+    @IBAction func done(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func setupMailView() {
         let subject = "Feedback on Weather Hunter"
         let toRecipents = ["support@weatherhunt.com"]
         let mc = MFMailComposeViewController()
@@ -27,14 +35,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         mc.setSubject(subject)
         mc.setMessageBody("", isHTML: false)
         mc.setToRecipients(toRecipents)
-        // Present mail view controller on screen
         self.present(mc, animated: true, completion: nil)
     }
-    
-    @IBAction func done(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult, error: Error?) {
