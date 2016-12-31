@@ -51,9 +51,16 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     }
     
     func setupTapRecognizer() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(self.handleTap))
-        gestureRecognizer.delegate = self
-        mapView.addGestureRecognizer(gestureRecognizer)
+        let singleTapRecognizer = UITapGestureRecognizer(target: self, action:#selector(self.handleTap))
+        singleTapRecognizer.numberOfTapsRequired = 1
+        singleTapRecognizer.delegate = self
+        mapView.addGestureRecognizer(singleTapRecognizer)
+        
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action:nil)
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        mapView.addGestureRecognizer(doubleTapRecognizer)
+        
+        singleTapRecognizer.require(toFail: doubleTapRecognizer)
     }
     
     
