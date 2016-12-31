@@ -25,7 +25,9 @@ extension Date {
 
 
 class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+
     @IBOutlet weak var datePicker: UISegmentedControl!
+    @IBOutlet weak var  mapView: MKMapView!
     @IBAction func dateChanged(_ sender: Any) {
         for an in mapView.annotations {
             if let an = an as? WeatherAnnotation {
@@ -37,7 +39,11 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
     }
     @IBAction func touchRecognizer(_ sender: Any) {}
-    @IBOutlet weak var  mapView: MKMapView!
+
+    @IBAction func clearMap(_ sender: Any) {
+        let weatherAnnotations = mapView.annotations.flatMap { an in an as? WeatherAnnotation }
+        mapView.removeAnnotations(weatherAnnotations)
+    }
     var loadingSubview : LoadingSubview!
 
     override func viewDidLoad() {
