@@ -13,12 +13,12 @@ import MapKit
 class WeatherAnnotationTests: XCTestCase {
    
     func testInit_Valid_SetsTitleWithCondition() {
-        let portland = CLLocationCoordinate2D(latitude: 45.5, longitude: -122.6)
+        let fixture = ForecastTests().createWeatherProxyFixture()
+        let forecast = try! Forecast.init(fromWeatherProxy: fixture!)
 
-        let weather = DailyWeather(tempHigh: 100, tempLow: 0, condition: "Snow", date: Date.init(), coordinate: portland)
-        let annotation = WeatherAnnotation.init(fromDailyWeather: weather)
+        let annotation = WeatherAnnotation.init(from: forecast, on: 0)
         
-        XCTAssert(annotation.title == "Snow")
+        XCTAssert(annotation.title == "Increasing Clouds")
         
     }
     
