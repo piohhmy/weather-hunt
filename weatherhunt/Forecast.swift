@@ -61,8 +61,8 @@ class Forecast {
             guard let weatherDetails = weather as? [String: Any] else {
                 throw SerializationError.missing("daily_weather")
             }
-            guard let tempHigh = weatherDetails["high"] as? Double,
-                let tempLow = weatherDetails["low"] as? Double,
+            guard let tempHigh = weatherDetails["high"] as? Int,
+                let tempLow = weatherDetails["low"] as? Int,
                 let condition = weatherDetails["condition"] as? String
                 else {
                     throw SerializationError.missing("daily_weather entry")

@@ -10,8 +10,8 @@ import Foundation
 import MapKit
 
 struct DailyWeather {
-    let tempHigh: Double
-    let tempLow: Double
+    let tempHigh: Int
+    let tempLow: Int
     let condition: String
     let date: Date
     let coordinate: CLLocationCoordinate2D

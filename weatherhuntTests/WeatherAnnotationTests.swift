@@ -18,8 +18,8 @@ class WeatherAnnotationTests: XCTestCase {
 
         let annotation = WeatherAnnotation.init(from: forecast, on: 0)
         
-        XCTAssert(annotation.title == "Increasing Clouds")
-        
+        XCTAssertEqual(annotation.title, "Increasing Clouds")
+        XCTAssertEqual(annotation.subtitle, "High: 32 Low: 16")
     }
     
 }
