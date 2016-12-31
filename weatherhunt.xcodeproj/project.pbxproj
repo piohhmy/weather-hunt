@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B509756A1E1841D00009C4A8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50975691E1841D00009C4A8 /* Reachability.swift */; };
 		B51D62E71E05C21B0076A089 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DA4D71E05BD7200FE6255 /* DailyWeather.swift */; };
 		B51D63041E062D070076A089 /* WeatherAnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D63031E062D070076A089 /* WeatherAnnotationTests.swift */; };
 		B51DA4D11E04900000FE6255 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DA4D01E04900000FE6255 /* Forecast.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B50975691E1841D00009C4A8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		B51D63031E062D070076A089 /* WeatherAnnotationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAnnotationTests.swift; sourceTree = "<group>"; };
 		B51DA4D01E04900000FE6255 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		B51DA4D31E0498BC00FE6255 /* ForecastTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastTests.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				B51DA4D71E05BD7200FE6255 /* DailyWeather.swift */,
 				B5B2FBF31E14CFC60030875D /* LoadingSubview.swift */,
 				B55339941E16DBE0000FC2B6 /* InfoViewController.swift */,
+				B50975691E1841D00009C4A8 /* Reachability.swift */,
 			);
 			path = weatherhunt;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				B5EFA4DF1DF29FA700C313F9 /* ViewController.swift in Sources */,
 				B5B2FBF41E14CFC60030875D /* LoadingSubview.swift in Sources */,
 				B5EFA50B1DF2A65300C313F9 /* WeatherProxy.swift in Sources */,
+				B509756A1E1841D00009C4A8 /* Reachability.swift in Sources */,
 				B5B2FBF61E15ABD70030875D /* WeatherAnnotation.swift in Sources */,
 				B55339951E16DBE0000FC2B6 /* InfoViewController.swift in Sources */,
 				B5EFA4DD1DF29FA700C313F9 /* AppDelegate.swift in Sources */,

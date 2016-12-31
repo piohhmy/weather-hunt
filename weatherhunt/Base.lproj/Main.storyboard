@@ -95,6 +95,7 @@
                     </view>
                     <connections>
                         <outlet property="datePicker" destination="3bd-fR-RWv" id="eB6-j1-eJ6"/>
+                        <outlet property="headerLabel" destination="Zgt-Kw-liC" id="DQN-NL-ZeQ"/>
                         <outlet property="mapView" destination="HEF-sn-prU" id="Vp3-CR-53c"/>
                     </connections>
                 </viewController>

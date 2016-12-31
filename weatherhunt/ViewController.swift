@@ -25,7 +25,7 @@ extension Date {
 
 
 class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
-
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var datePicker: UISegmentedControl!
     @IBOutlet weak var  mapView: MKMapView!
     @IBAction func dateChanged(_ sender: Any) {
@@ -48,12 +48,19 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (!Reachability.isConnectedToNetwork()) {
+            setBadNetworkMsg()
+        }
         datePicker.isHidden = true
         mapView.delegate = self
         mapView.isRotateEnabled = false
         self.setupTapRecognizer()
         self.loadingSubview = LoadingSubview(superview: self.view)
         //let portland = CLLocationCoordinate2D(latitude: 45.5, longitude: -122.6)
+    }
+    
+    func setBadNetworkMsg() {
+        headerLabel.text = "Oops. No Network"
     }
     
     func setupTapRecognizer() {
@@ -104,9 +111,20 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
         if let forecast = forecast {
             let annotation = WeatherAnnotation(from: forecast, on: datePicker.selectedSegmentIndex)
+            headerLabel.text = "Tap For Weather"
+
             DispatchQueue.main.async {
                 self.setupDatePicker(for: forecast)
                 self.mapView.addAnnotation(annotation)
+            }
+        }
+        else if let err = err {
+            if(!Reachability.isConnectedToNetwork()) {
+                setBadNetworkMsg()
+            }
+            else {
+                print(err)
+                headerLabel.text = "Oops. Weather not available"
             }
         }
     }
