@@ -172,5 +172,12 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
         return nil
     }
+    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let weatherAns = views.flatMap { view in view.annotation as? WeatherAnnotation }
+        if(weatherAns.count > 0) {
+            mapView.selectAnnotation(weatherAns[0], animated: true)
+        }
+    }
 }
 
