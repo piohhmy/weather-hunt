@@ -23,11 +23,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HEF-sn-prU">
-                                <rect key="frame" x="0.0" y="20" width="374" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <gestureRecognizers/>
                             </mapView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-OY-5fw">
-                                <rect key="frame" x="-0.5" y="20" width="374" height="44"/>
+                                <rect key="frame" x="-0.5" y="20" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" id="2NG-pC-fGZ">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cel-Td-ixh">
@@ -38,7 +38,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="3SF-iK-ylW"/>
                                     <barButtonItem style="plain" id="SCm-LI-0dN">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="RHh-W1-gZz">
-                                            <rect key="frame" x="336" y="11" width="22" height="22"/>
+                                            <rect key="frame" x="337" y="11" width="22" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -53,11 +53,29 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap For Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgt-Kw-liC">
-                                <rect key="frame" x="123" y="32" width="127" height="20.5"/>
+                                <rect key="frame" x="123.5" y="32" width="127" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3bd-fR-RWv">
+                                <rect key="frame" x="0.0" y="622" width="375" height="46"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="ULi-s5-Ncg"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Mon"/>
+                                    <segment title="Tues"/>
+                                    <segment title="Wed"/>
+                                    <segment title="Thurs"/>
+                                    <segment title="Fri"/>
+                                    <segment title="Sat"/>
+                                </segments>
+                                <connections>
+                                    <action selector="dateChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Gkq-D7-mWA"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -65,6 +83,9 @@
                             <constraint firstItem="Zgt-Kw-liC" firstAttribute="centerY" secondItem="TNV-OY-5fw" secondAttribute="centerY" id="16T-Po-fhc"/>
                             <constraint firstItem="Zgt-Kw-liC" firstAttribute="centerX" secondItem="TNV-OY-5fw" secondAttribute="centerX" id="1MQ-E5-B7O"/>
                             <constraint firstItem="TNV-OY-5fw" firstAttribute="centerX" secondItem="HEF-sn-prU" secondAttribute="centerX" id="CQU-Ty-Sff"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="centerX" secondItem="HEF-sn-prU" secondAttribute="centerX" id="CaF-PW-mcz"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="width" secondItem="HEF-sn-prU" secondAttribute="width" id="QZj-Om-cE9"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="bottom" secondItem="HEF-sn-prU" secondAttribute="bottom" id="bPW-RU-odd"/>
                             <constraint firstItem="HEF-sn-prU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fIz-zU-06i"/>
                             <constraint firstItem="TNV-OY-5fw" firstAttribute="width" secondItem="HEF-sn-prU" secondAttribute="width" id="gfw-jv-pwc"/>
                             <constraint firstItem="HEF-sn-prU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="klh-mW-dE1"/>
@@ -74,6 +95,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="datePicker" destination="3bd-fR-RWv" id="eB6-j1-eJ6"/>
                         <outlet property="mapView" destination="HEF-sn-prU" id="Vp3-CR-53c"/>
                     </connections>
                 </viewController>

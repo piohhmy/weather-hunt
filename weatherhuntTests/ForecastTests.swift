@@ -11,9 +11,9 @@ import XCTest
 import MapKit
 
 class ForecastTests: XCTestCase {
-    func createWeatherProxyFixture() -> [Any]? {
+    func createWeatherProxyFixture(resource: String = "weatherProxyTestFixture") -> [Any]? {
         let bundle = Bundle(for: type(of: self));
-        let fileUrl = bundle.url(forResource: "weatherProxyTestFixture", withExtension: "json")
+        let fileUrl = bundle.url(forResource: resource, withExtension: "json")
         do {
             let data = try Data(contentsOf: fileUrl!)
             if let jsonData = try JSONSerialization.jsonObject(with: data) as? [Any] {
@@ -61,6 +61,32 @@ class ForecastTests: XCTestCase {
         let expectedDate = userCalendar.date(from: comp)!
         
         XCTAssert(weather.date == expectedDate)
-        
     }
+    
+    func testStartDate_forecastExists_ReturnsFirstDayOfForecast() {
+        let forecast = try! Forecast(fromWeatherProxy: createWeatherProxyFixture()!)
+        let userCalendar = Calendar.current
+        var comp = DateComponents()
+        comp.year = 2016
+        comp.month = 12
+        comp.day = 16
+        let expectedDate = userCalendar.date(from: comp)!
+        XCTAssert(forecast.startDate == expectedDate)
+    }
+    
+    func testStartDate_forecastDoesNotExist_ReturnsNull() {
+        let forecast = try! Forecast(fromWeatherProxy: createWeatherProxyFixture(resource: "weatherProxyEmptyTestFixture")!)
+        XCTAssert(forecast.startDate == nil)
+    }
+    
+    func testAvailableDays_forecast6days_returns6() {
+        let forecast = try! Forecast(fromWeatherProxy: createWeatherProxyFixture()!)
+        XCTAssert(forecast.availableDays == 6)
+    }
+    
+    func testAvailableDays_forecast0days_returns0() {
+        let forecast = try! Forecast(fromWeatherProxy: createWeatherProxyFixture(resource: "weatherProxyEmptyTestFixture")!)
+        XCTAssert(forecast.availableDays == 0)
+    }
+    
 }

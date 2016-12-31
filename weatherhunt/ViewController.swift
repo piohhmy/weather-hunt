@@ -9,13 +9,40 @@
 import UIKit
 import MapKit
 
+extension Date {
+    func shortDayOfTheWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        return dateFormatter.string(from: self)
+    }
+    
+    func shortDate() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d"
+        return dateFormatter.string(from: self)
+    }
+}
+
+
 class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+    @IBOutlet weak var datePicker: UISegmentedControl!
+    @IBAction func dateChanged(_ sender: Any) {
+        for an in mapView.annotations {
+            if let an = an as? WeatherAnnotation {
+                an.switchTo(day: datePicker.selectedSegmentIndex)
+                if let view = mapView.view(for: an) {
+                    update(annoationView: view, with: an)
+                }
+            }
+        }
+    }
     @IBAction func touchRecognizer(_ sender: Any) {}
     @IBOutlet weak var  mapView: MKMapView!
     var loadingSubview : LoadingSubview!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        datePicker.isHidden = true
         mapView.delegate = self
         mapView.isRotateEnabled = false
         self.setupTapRecognizer()
@@ -29,6 +56,33 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         mapView.addGestureRecognizer(gestureRecognizer)
     }
     
+    
+    func setupDatePicker(for forecast: Forecast) {
+        datePicker.isHidden = false
+        UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 2
+        
+        for day in 0...6 {
+            if let weather = try? forecast.on(day: day) {
+                if datePicker.numberOfSegments <= day {
+                    datePicker.insertSegment(withTitle: "", at: day, animated: true)
+                }
+                datePicker.setTitle("\(weather.date.shortDayOfTheWeek()!)\n\(weather.date.shortDate()!)", forSegmentAt: day)
+                datePicker.setWidth(self.view.bounds.size.width/CGFloat(forecast.availableDays), forSegmentAt: day)
+            }
+        }
+        
+        // Labels don't seem to get proper bounding frame with multiline strings in SegmentedControl, set manually
+        for segment in self.datePicker.subviews {
+            for subview in segment.subviews {
+                if let titleLabel = subview as? UILabel {
+                    titleLabel.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(97), height: CGFloat(50))
+                }
+            }
+        }
+        
+        datePicker.isHidden = false
+    }
+    
     func onReceiveForecast(err: String?, forecast: Forecast?) {
         defer {
             DispatchQueue.main.async {
@@ -36,16 +90,10 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
             }
         }
         if let forecast = forecast {
-            do {
-                let annotation = try WeatherAnnotation(fromDailyWeather: forecast.on(day: 0))
-                DispatchQueue.main.async {
-                    self.mapView.addAnnotation(annotation)
-
-                }
-            } catch ForecastError.NoWeatherAvailable{
-                print("No weather found")
-            } catch {
-                print("Error")
+            let annotation = WeatherAnnotation(from: forecast, on: datePicker.selectedSegmentIndex)
+            DispatchQueue.main.async {
+                self.setupDatePicker(for: forecast)
+                self.mapView.addAnnotation(annotation)
             }
         }
     }
@@ -90,17 +138,28 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         return true
     }
     
+    func update(annoationView view: MKAnnotationView, with annotation: WeatherAnnotation) {
+        view.annotation = annotation
+        if(annotation.isViewable) {
+            view.image = annotation.image
+            view.isHidden = false
+        }
+        else {
+            print("annotation not available for \(annotation.coordinate)")
+            view.isHidden = true
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let weatherAnnotation = annotation as? WeatherAnnotation {
             let annotationIdentifier = "weather-annotation"
             if let existingView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-                existingView.annotation = annotation
-                existingView.image = weatherAnnotation.image
+                update(annoationView: existingView, with: weatherAnnotation)
                 return existingView
             } else {
-                let newView = MKAnnotationView.init(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                newView.image = weatherAnnotation.image
+                let newView = MKAnnotationView.init(annotation: weatherAnnotation, reuseIdentifier: annotationIdentifier)
                 newView.canShowCallout = true
+                update(annoationView: newView, with: weatherAnnotation)
                 return newView
             }
         }

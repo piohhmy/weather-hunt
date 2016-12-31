@@ -25,6 +25,14 @@ class Forecast {
     var location: CLLocationCoordinate2D
     private var dailyWeather: [DailyWeather] = []
     
+    var startDate: Date? {
+        return try? self.on(day: 0).date
+    }
+    
+    var availableDays: Int {
+        return dailyWeather.count
+    }
+    
     init(fromWeatherProxy response:[Any]) throws {
         guard let jsonObj = response.first as? [String: Any] else {
          throw SerializationError.missing("forecast")
@@ -76,4 +84,5 @@ class Forecast {
         }
         return dailyWeather[day]
     }
+    
 }

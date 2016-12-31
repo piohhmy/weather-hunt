@@ -110,14 +110,19 @@ let conditionImages = [
 
 
 class WeatherAnnotation: MKPointAnnotation {
-    var image:UIImage?
+    var image:UIImage? = nil
+    let forecast:Forecast
+    var isViewable : Bool {
+        return self.image != nil
+    }
     
-    init(fromDailyWeather weather:DailyWeather) {
-        self.image = conditionImages[weather.condition]
+    init(from forecast: Forecast, on day: Int) {
+        self.forecast = forecast
         super.init()
-        self.title = weather.condition
-        self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
-        self.coordinate = weather.coordinate
+        self.coordinate = forecast.location
+        switchTo(day: day)
+
+        
     }
     
     func isOverlapping(other annotation: WeatherAnnotation, on mapView: MKMapView) -> Bool{
@@ -129,6 +134,18 @@ class WeatherAnnotation: MKPointAnnotation {
             }
         }
         return false
+    }
+    
+    func switchTo(day: Int) {
+        if let weather = try? forecast.on(day: day) {
+            self.image = conditionImages[weather.condition]
+            self.title = weather.condition
+            self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
+        } else {
+            self.image = nil
+            self.title = ""
+            self.subtitle = ""
+        }
     }
     
     func isOverlapping(with point: CGPoint, on mapView: MKMapView) -> Bool {
