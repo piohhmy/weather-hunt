@@ -59,10 +59,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3bd-fR-RWv">
-                                <rect key="frame" x="0.0" y="622" width="375" height="46"/>
+                                <rect key="frame" x="0.0" y="627" width="375" height="41"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="ULi-s5-Ncg"/>
+                                    <constraint firstAttribute="height" constant="40" id="ULi-s5-Ncg"/>
                                 </constraints>
                                 <segments>
                                     <segment title="Mon"/>
