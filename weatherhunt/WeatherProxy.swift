@@ -32,7 +32,13 @@ func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: 
             }
             
             if let json = try JSONSerialization.jsonObject(with: data) as? [Any] {
-                completion(nil, try Forecast.init(fromWeatherProxy: json))
+                let forecast = try Forecast.init(fromWeatherProxy: json)
+                if(forecast.availableDays>0) {
+                    completion(nil, forecast)
+                }
+                else {
+                    completion("No weather found", nil)
+                }
             }
             else {
                 completion("error in JSONSerialization", nil)

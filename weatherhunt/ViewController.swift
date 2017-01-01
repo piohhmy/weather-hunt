@@ -38,6 +38,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
             }
         }
     }
+    let badNetworkMsg = "Oops. No Network"
+    
     @IBAction func touchRecognizer(_ sender: Any) {}
 
     @IBAction func clearMap(_ sender: Any) {
@@ -49,7 +51,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         if (!Reachability.isConnectedToNetwork()) {
-            setBadNetworkMsg()
+            headerLabel.text = badNetworkMsg
         }
         registerForRotationEvents()
 
@@ -65,9 +67,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
          NotificationCenter.default.addObserver(self, selector: #selector(ViewController.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
-    func setBadNetworkMsg() {
-        headerLabel.text = "Oops. No Network"
-    }
     
     func setupTapRecognizer() {
         let singleTapRecognizer = UITapGestureRecognizer(target: self, action:#selector(self.handleTap))
@@ -124,20 +123,24 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
         if let forecast = forecast {
             let annotation = WeatherAnnotation(from: forecast, on: datePicker.selectedSegmentIndex)
-            headerLabel.text = "Tap For Weather"
-
+            
             DispatchQueue.main.async {
+                self.headerLabel.text = "Tap For Weather"
                 self.setupDatePicker(for: forecast)
                 self.mapView.addAnnotation(annotation)
             }
         }
         else if let err = err {
+            var msg: String
             if(!Reachability.isConnectedToNetwork()) {
-                setBadNetworkMsg()
+                msg = badNetworkMsg
             }
             else {
                 print(err)
-                headerLabel.text = "Oops. Weather not available"
+                msg = "Oops. Weather not available"
+            }
+            DispatchQueue.main.async {
+                self.headerLabel.text = msg
             }
         }
     }
