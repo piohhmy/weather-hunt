@@ -24,7 +24,7 @@ extension Date {
 }
 
 
-class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate{
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var datePicker: UISegmentedControl!
     @IBOutlet weak var  mapView: MKMapView!
@@ -39,6 +39,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
     }
     let badNetworkMsg = "Oops. No Network"
+    let locationManager = CLLocationManager()
+
     
     @IBAction func touchRecognizer(_ sender: Any) {}
 
@@ -58,6 +60,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         datePicker.isHidden = true
         mapView.delegate = self
         mapView.isRotateEnabled = false
+
+        self.setupUserLocation()
         self.setupTapRecognizer()
         self.loadingSubview = LoadingSubview(superview: self.view)
         //let portland = CLLocationCoordinate2D(latitude: 45.5, longitude: -122.6)
@@ -67,7 +71,39 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
          NotificationCenter.default.addObserver(self, selector: #selector(ViewController.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
+    func setupUserLocation() {
+        locationManager.delegate = self
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
+            showUserLocation()
+        }
+        else if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    func showUserLocation() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
+            mapView.showsUserLocation = true
+        }
+    }
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        showUserLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.last {
+            print("Users Location at \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
+            let viewRegion = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, 300000, 300000)
+            mapView.setRegion(viewRegion, animated: true)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Could not get user location: \(error.localizedDescription)")
+    }
+        
     func setupTapRecognizer() {
         let singleTapRecognizer = UITapGestureRecognizer(target: self, action:#selector(self.handleTap))
         singleTapRecognizer.numberOfTapsRequired = 1
