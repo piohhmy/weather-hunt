@@ -51,12 +51,18 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         if (!Reachability.isConnectedToNetwork()) {
             setBadNetworkMsg()
         }
+        registerForRotationEvents()
+
         datePicker.isHidden = true
         mapView.delegate = self
         mapView.isRotateEnabled = false
         self.setupTapRecognizer()
         self.loadingSubview = LoadingSubview(superview: self.view)
         //let portland = CLLocationCoordinate2D(latitude: 45.5, longitude: -122.6)
+    }
+    
+    func registerForRotationEvents() {
+         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     func setBadNetworkMsg() {
@@ -87,8 +93,17 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
                     datePicker.insertSegment(withTitle: "", at: day, animated: true)
                 }
                 datePicker.setTitle("\(weather.date.shortDayOfTheWeek()!)\n\(weather.date.shortDate()!)", forSegmentAt: day)
-                datePicker.setWidth(self.view.bounds.size.width/CGFloat(forecast.availableDays), forSegmentAt: day)
             }
+        }
+        
+        adjustDatePickerSize()
+        datePicker.isHidden = false
+    }
+    
+    func adjustDatePickerSize() {
+        let segments = datePicker.numberOfSegments
+        for day in 0...segments-1 {
+            datePicker.setWidth(self.view.bounds.size.width/CGFloat(segments), forSegmentAt: day)
         }
         
         // Labels don't seem to get proper bounding frame with multiline strings in SegmentedControl, set manually
@@ -99,8 +114,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
                 }
             }
         }
-        
-        datePicker.isHidden = false
     }
     
     func onReceiveForecast(err: String?, forecast: Forecast?) {

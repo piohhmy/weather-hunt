@@ -15,9 +15,21 @@ class LoadingSubview : UIActivityIndicatorView {
         self.layer.backgroundColor = UIColor(white: CGFloat(0.0), alpha: CGFloat(0.30)).cgColor
         self.hidesWhenStopped = true
         self.isUserInteractionEnabled = false
-        self.frame = superview.frame
-        self.center = superview.center
         superview.addSubview(self)
+        self.updateSize()
+
+        registerForRotationEvents()
+    }
+    
+    func registerForRotationEvents() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    }
+    
+    func updateSize() {
+        if let superview = self.superview {
+            self.frame = superview.frame
+            self.center = superview.center
+        }
     }
     
     override func startAnimating() {
