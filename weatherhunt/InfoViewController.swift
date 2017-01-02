@@ -18,6 +18,11 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             feedbackBtn.isHidden = true;
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        sendScreenName(value: "Info")
+    }
+    
 
     @IBAction func provideFeedback(_ sender: Any) {
        setupMailView()

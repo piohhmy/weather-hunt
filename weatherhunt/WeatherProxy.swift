@@ -9,7 +9,10 @@
 import Foundation
 import MapKit
 
+
+
 func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: String?, _ forecast: Forecast? ) -> Void) {
+    let startTime = DispatchTime.now()
     let base = "https://bh6cj0clm5.execute-api.us-west-2.amazonaws.com/"
     let resource = "dev/weather/forecast"
     let queryparams = "?lat=\(coord.latitude)&lng=\(coord.longitude)"
@@ -20,6 +23,7 @@ func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: 
     
     session.dataTask(with: request) {
         data, response, error in
+
         if error != nil {
             completion(error!.localizedDescription, nil)
             return
@@ -35,6 +39,11 @@ func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: 
                 let forecast = try Forecast.init(fromWeatherProxy: json)
                 if(forecast.availableDays>0) {
                     completion(nil, forecast)
+                    let endTime = DispatchTime.now()
+                    let nanoTime = endTime.uptimeNanoseconds - startTime.uptimeNanoseconds
+                    let milliTime = NSNumber(value: Double(nanoTime) / 1_000_000)
+                    sendTimeEvent(withCategory: "map", interval: milliTime, name: "Forecast Load Time", label: nil)
+
                 }
                 else {
                     completion("No weather found", nil)

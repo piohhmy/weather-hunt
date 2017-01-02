@@ -20,6 +20,8 @@
 		B538DD751E1737E000036DD4 /* weatherProxyEmptyTestFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */; };
 		B55339951E16DBE0000FC2B6 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55339941E16DBE0000FC2B6 /* InfoViewController.swift */; };
 		B58017841E1AEA47006C3279 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B58017831E1AEA47006C3279 /* Launch Screen.xib */; };
+		B58017861E1AEE8C006C3279 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B58017851E1AEE8C006C3279 /* GoogleService-Info.plist */; };
+		B58017891E1AFD99006C3279 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58017881E1AFD99006C3279 /* Analytics.swift */; };
 		B5B2FBF41E14CFC60030875D /* LoadingSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B2FBF31E14CFC60030875D /* LoadingSubview.swift */; };
 		B5B2FBF61E15ABD70030875D /* WeatherAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */; };
 		B5B2FBF71E15ADCC0030875D /* WeatherAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */; };
@@ -70,6 +72,9 @@
 		B55339941E16DBE0000FC2B6 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherProxyEmptyTestFixture.json; sourceTree = "<group>"; };
 		B58017831E1AEA47006C3279 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		B58017851E1AEE8C006C3279 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B58017871E1AEF44006C3279 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		B58017881E1AFD99006C3279 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		B5B2FBF31E14CFC60030875D /* LoadingSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingSubview.swift; sourceTree = "<group>"; };
 		B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAnnotation.swift; sourceTree = "<group>"; };
 		B5EFA4D91DF29FA700C313F9 /* weatherhunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherhunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +169,8 @@
 		B5EFA4DB1DF29FA700C313F9 /* weatherhunt */ = {
 			isa = PBXGroup;
 			children = (
+				B58017851E1AEE8C006C3279 /* GoogleService-Info.plist */,
+				B58017871E1AEF44006C3279 /* BridgingHeader.h */,
 				B5EFA4DC1DF29FA700C313F9 /* AppDelegate.swift */,
 				B5EFA4DE1DF29FA700C313F9 /* ViewController.swift */,
 				B5EFA4E01DF29FA700C313F9 /* Main.storyboard */,
@@ -178,6 +185,7 @@
 				B5B2FBF31E14CFC60030875D /* LoadingSubview.swift */,
 				B55339941E16DBE0000FC2B6 /* InfoViewController.swift */,
 				B50975691E1841D00009C4A8 /* Reachability.swift */,
+				B58017881E1AFD99006C3279 /* Analytics.swift */,
 			);
 			path = weatherhunt;
 			sourceTree = "<group>";
@@ -325,6 +333,7 @@
 			files = (
 				B5EFA4E71DF29FA700C313F9 /* LaunchScreen.storyboard in Resources */,
 				B58017841E1AEA47006C3279 /* Launch Screen.xib in Resources */,
+				B58017861E1AEE8C006C3279 /* GoogleService-Info.plist in Resources */,
 				B5EFA4E41DF29FA700C313F9 /* Assets.xcassets in Resources */,
 				B5EFA4E21DF29FA700C313F9 /* Main.storyboard in Resources */,
 			);
@@ -499,6 +508,7 @@
 				B509756A1E1841D00009C4A8 /* Reachability.swift in Sources */,
 				B5B2FBF61E15ABD70030875D /* WeatherAnnotation.swift in Sources */,
 				B55339951E16DBE0000FC2B6 /* InfoViewController.swift in Sources */,
+				B58017891E1AFD99006C3279 /* Analytics.swift in Sources */,
 				B5EFA4DD1DF29FA700C313F9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,8 +672,9 @@
 				DEVELOPMENT_TEAM = WH8UR4YUC6;
 				INFOPLIST_FILE = weatherhunt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hillcroft.weatherhunt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dannyvarner.WeatherHunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = weatherhunt/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -677,8 +688,9 @@
 				DEVELOPMENT_TEAM = WH8UR4YUC6;
 				INFOPLIST_FILE = weatherhunt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hillcroft.weatherhunt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dannyvarner.WeatherHunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = weatherhunt/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

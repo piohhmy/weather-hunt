@@ -141,6 +141,9 @@ class WeatherAnnotation: MKPointAnnotation {
             self.image = conditionImages[weather.condition]
             self.title = weather.condition
             self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
+            if (self.image == nil) {
+                sendException(withDescription: "No image for \(weather.condition)", isFatal: false)
+            }
         } else {
             self.image = nil
             self.title = ""
