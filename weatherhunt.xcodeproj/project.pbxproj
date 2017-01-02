@@ -19,6 +19,7 @@
 		B51DA4D81E05BD7200FE6255 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DA4D71E05BD7200FE6255 /* DailyWeather.swift */; };
 		B538DD751E1737E000036DD4 /* weatherProxyEmptyTestFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */; };
 		B55339951E16DBE0000FC2B6 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55339941E16DBE0000FC2B6 /* InfoViewController.swift */; };
+		B58017841E1AEA47006C3279 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B58017831E1AEA47006C3279 /* Launch Screen.xib */; };
 		B5B2FBF41E14CFC60030875D /* LoadingSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B2FBF31E14CFC60030875D /* LoadingSubview.swift */; };
 		B5B2FBF61E15ABD70030875D /* WeatherAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */; };
 		B5B2FBF71E15ADCC0030875D /* WeatherAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */; };
@@ -68,6 +69,7 @@
 		B51DA4D71E05BD7200FE6255 /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
 		B55339941E16DBE0000FC2B6 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherProxyEmptyTestFixture.json; sourceTree = "<group>"; };
+		B58017831E1AEA47006C3279 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		B5B2FBF31E14CFC60030875D /* LoadingSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingSubview.swift; sourceTree = "<group>"; };
 		B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAnnotation.swift; sourceTree = "<group>"; };
 		B5EFA4D91DF29FA700C313F9 /* weatherhunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherhunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 				B5EFA4DE1DF29FA700C313F9 /* ViewController.swift */,
 				B5EFA4E01DF29FA700C313F9 /* Main.storyboard */,
 				B5EFA4E31DF29FA700C313F9 /* Assets.xcassets */,
+				B58017831E1AEA47006C3279 /* Launch Screen.xib */,
 				B5EFA4E51DF29FA700C313F9 /* LaunchScreen.storyboard */,
 				B5EFA4E81DF29FA700C313F9 /* Info.plist */,
 				B5EFA50A1DF2A65300C313F9 /* WeatherProxy.swift */,
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5EFA4E71DF29FA700C313F9 /* LaunchScreen.storyboard in Resources */,
+				B58017841E1AEA47006C3279 /* Launch Screen.xib in Resources */,
 				B5EFA4E41DF29FA700C313F9 /* Assets.xcassets in Resources */,
 				B5EFA4E21DF29FA700C313F9 /* Main.storyboard in Resources */,
 			);
@@ -596,7 +600,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -641,7 +645,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
