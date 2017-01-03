@@ -20,7 +20,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        sendScreenName(value: "Info")
+        Analytics.sendScreenName(value: "Info")
     }
     
 

@@ -9,44 +9,47 @@
 import Foundation
 
 
-func sendEvent(withCategory: String, action: String, label: String?, value: NSNumber?) {
-    if let tracker = GAI.sharedInstance().defaultTracker {
-        let builder: NSObject = GAIDictionaryBuilder.createEvent(
-            withCategory: withCategory,
-            action: action,
-            label: label,
-            value: value).build()
-        tracker.send(builder as! [NSObject : AnyObject])
-    } else {
-        print("Google Analytics tracker not available")
+class Analytics {
+    static var tracker : GAITracker? = nil
+    
+    static func setup() {
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        if let gai = GAI.sharedInstance() {
+            gai.trackUncaughtExceptions = true  // report uncaught exceptions
+            gai.logger.logLevel = GAILogLevel.verbose  // remove before app release
+        }
+        
+        self.tracker = GAI.sharedInstance().defaultTracker
     }
-}
-
-
-func sendTimeEvent(withCategory: String, interval: NSNumber, name: String, label: String?) {
-    if let tracker = GAI.sharedInstance().defaultTracker {
-        let builder: NSObject = GAIDictionaryBuilder.createTiming(withCategory: withCategory, interval: interval, name: name, label: label).build()
-        tracker.send(builder as! [NSObject : AnyObject])
-    } else {
-        print("Google Analytics tracker not available")
+    
+    static func sendEvent(category: String, action: String, label: String?, value: NSNumber?) {
+        _send(event: GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: value))
     }
-}
-
-func sendScreenName(value: String) {
-    if let tracker = GAI.sharedInstance().defaultTracker {
-        tracker.set(kGAIScreenName, value: value)
-        if let builder = GAIDictionaryBuilder.createScreenView() {
-            tracker.send(builder.build() as [NSObject : AnyObject])
+    
+    static func sendTimeEvent(category: String, interval: NSNumber, name: String, label: String?) {
+        _send(event: GAIDictionaryBuilder.createTiming(withCategory: category, interval: interval, name: name, label: label))
+    }
+    
+    static func sendScreenName(value: String) {
+        _send(event: GAIDictionaryBuilder.createScreenView())
+        if let tracker = tracker {
+            tracker.set(kGAIScreenName, value: value)
         }
     }
-}
-
-func sendException(withDescription: String, isFatal: Bool) {
     
-    if let tracker = GAI.sharedInstance().defaultTracker {
-        let builder: NSObject = GAIDictionaryBuilder.createException(withDescription: withDescription, withFatal: NSNumber(value: isFatal)).build()
-        tracker.send(builder as! [NSObject : AnyObject])
-    } else {
-        print("Google Analytics tracker not available")
+    static func sendException(description: String, isFatal: Bool) {
+        let withFatal = NSNumber(value: isFatal)
+        _send(event: GAIDictionaryBuilder.createException(withDescription: description, withFatal: withFatal))
+    }
+    
+    private static func _send(event: GAIDictionaryBuilder) {
+        if let tracker = tracker {
+            tracker.send(event.build() as [NSObject : AnyObject])
+        }
     }
 }

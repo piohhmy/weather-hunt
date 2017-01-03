@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -114,9 +115,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather icons by Alessio Atzeni, from thenounproject.com collection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="KkW-U7-5W7">
-                                <rect key="frame" x="16" y="590" width="343" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="KkW-U7-5W7">
+                                <rect key="frame" x="16" y="554" width="343" height="53"/>
+                                <string key="text">Weather data from the NOAA National Weather Service 
+
+Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -132,8 +136,8 @@
                                 </items>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhA-ax-cVe">
-                                <rect key="frame" x="123" y="552" width="129" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <rect key="frame" x="117" y="511" width="142" height="35"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
                                 <state key="normal" title="Provide Feedback">
                                     <color key="titleShadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
@@ -141,35 +145,33 @@
                                     <action selector="provideFeedback:" destination="3YP-Cm-Acr" eventType="touchUpInside" id="DrZ-hI-L16"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Weather Hunt " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPD-gg-Nw0">
-                                <rect key="frame" x="111" y="277" width="154" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="weather hunt " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPD-gg-Nw0">
+                                <rect key="frame" x="45.5" y="194" width="284" height="59"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="50"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Danny Varner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2M-ZN-lKZ">
-                                <rect key="frame" x="136" y="307" width="104" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="131.5" y="273" width="111" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KkW-U7-5W7" firstAttribute="top" secondItem="jhA-ax-cVe" secondAttribute="bottom" constant="8" id="02W-eK-KGQ"/>
-                            <constraint firstItem="q2M-ZN-lKZ" firstAttribute="top" secondItem="NPD-gg-Nw0" secondAttribute="bottom" constant="8" id="6RH-vD-Hnq"/>
+                            <constraint firstItem="NPD-gg-Nw0" firstAttribute="centerX" secondItem="OGI-Rd-t8M" secondAttribute="centerX" id="1Wc-j0-m5g"/>
                             <constraint firstItem="M6v-ok-yHW" firstAttribute="top" secondItem="JXg-aZ-3ab" secondAttribute="bottom" id="FU7-lJ-SWJ"/>
                             <constraint firstItem="q2M-ZN-lKZ" firstAttribute="centerX" secondItem="NPD-gg-Nw0" secondAttribute="centerX" id="G0U-wp-J7Z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JXg-aZ-3ab" secondAttribute="trailing" constant="-16" id="PAg-gz-I7j"/>
-                            <constraint firstAttribute="centerX" secondItem="NPD-gg-Nw0" secondAttribute="centerX" constant="-0.5" id="W4A-zG-eQI"/>
+                            <constraint firstItem="q2M-ZN-lKZ" firstAttribute="top" secondItem="NPD-gg-Nw0" secondAttribute="bottom" constant="20" id="VL0-Mn-6ru"/>
                             <constraint firstItem="JXg-aZ-3ab" firstAttribute="leading" secondItem="OGI-Rd-t8M" secondAttribute="leadingMargin" constant="-16" id="X5u-YC-cd6"/>
                             <constraint firstItem="KkW-U7-5W7" firstAttribute="trailing" secondItem="OGI-Rd-t8M" secondAttribute="trailingMargin" id="Xjl-uh-wsa"/>
-                            <constraint firstItem="M6v-ok-yHW" firstAttribute="top" secondItem="KkW-U7-5W7" secondAttribute="bottom" constant="50" id="fRm-di-v0x"/>
+                            <constraint firstItem="KkW-U7-5W7" firstAttribute="top" secondItem="jhA-ax-cVe" secondAttribute="bottom" constant="8" symbolic="YES" id="ceB-Rg-M1P"/>
+                            <constraint firstItem="M6v-ok-yHW" firstAttribute="top" secondItem="KkW-U7-5W7" secondAttribute="bottom" constant="60" id="fRm-di-v0x"/>
                             <constraint firstItem="KkW-U7-5W7" firstAttribute="leading" secondItem="OGI-Rd-t8M" secondAttribute="leadingMargin" id="gJw-E1-x8Y"/>
-                            <constraint firstAttribute="centerY" secondItem="q2M-ZN-lKZ" secondAttribute="centerY" constant="16" id="lgK-cc-Rra"/>
+                            <constraint firstItem="NPD-gg-Nw0" firstAttribute="centerY" secondItem="OGI-Rd-t8M" secondAttribute="centerY" multiplier="2/3" constant="1" id="iar-xP-qPA"/>
                             <constraint firstAttribute="centerX" secondItem="jhA-ax-cVe" secondAttribute="centerX" id="vQT-a8-P8P"/>
-                            <constraint firstAttribute="centerY" secondItem="q2M-ZN-lKZ" secondAttribute="centerY" constant="16" id="vrx-u7-RO2"/>
-                            <constraint firstAttribute="centerY" secondItem="NPD-gg-Nw0" secondAttribute="centerY" constant="45.5" id="whg-cO-xkf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -178,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rc-T4-aaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="858" y="139"/>
+            <point key="canvasLocation" x="856.79999999999995" y="138.98050974512745"/>
         </scene>
     </scenes>
 </document>

@@ -32,7 +32,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         for an in mapView.annotations {
             if let an = an as? WeatherAnnotation {
                 an.switchTo(day: datePicker.selectedSegmentIndex)
-                sendEvent(withCategory: "Map", action: "Change Date", label: nil, value: nil)
+                Analytics.sendEvent(category: "Map", action: "Change Date", label: nil, value: nil)
                 if let view = mapView.view(for: an) {
                     update(annoationView: view, with: an)
                 }
@@ -49,7 +49,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         let weatherAnnotations = mapView.annotations.flatMap { an in an as? WeatherAnnotation }
         
         mapView.removeAnnotations(weatherAnnotations)
-        sendEvent(withCategory: "Map", action: "Clear", label: nil, value: nil)
+        Analytics.sendEvent(category: "Map", action: "Clear", label: nil, value: nil)
 
     }
     var loadingSubview : LoadingSubview!
@@ -58,7 +58,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         super.viewDidLoad()
         if (!Reachability.isConnectedToNetwork()) {
             headerLabel.text = badNetworkMsg
-            sendEvent(withCategory: "Map", action: "Display", label: badNetworkMsg, value: nil)
+            Analytics.sendEvent(category: "Map", action: "Display", label: badNetworkMsg, value: nil)
         }
         registerForRotationEvents()
 
@@ -73,7 +73,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        sendScreenName(value: "Map")
+        Analytics.sendScreenName(value: "Map")
     }
     
     func registerForRotationEvents() {
@@ -183,7 +183,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
             else {
                 print(err)
                 msg = "Oops. Weather not available"
-                sendEvent(withCategory: "Map", action: "Display", label: msg, value: nil)
+                Analytics.sendEvent(category: "Map", action: "Display", label: msg, value: nil)
             }
             DispatchQueue.main.async {
                 self.headerLabel.text = msg
@@ -194,7 +194,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
       
     func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            sendEvent(withCategory: "Map", action: "Tap", label: "New Forecast", value: nil)
+            Analytics.sendEvent(category: "Map", action: "Tap", label: "New Forecast", value: nil)
             let location = sender.location(in: mapView)
             let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
             self.loadingSubview.startAnimating()
@@ -215,7 +215,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if (touch.view as? MKAnnotationView) != nil {
-            sendEvent(withCategory: "Map", action: "Tap", label: "Existing Forecast", value: nil)
+            Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
             print("Ignore tap on existing annotation")
             return false
         }
@@ -225,7 +225,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
                 if let weatherAnnotation = annotation as? WeatherAnnotation {
                     if weatherAnnotation.isOverlapping(with: p, on: mapView) {
                         print("Ignore tap nearby existing annotation")
-                        sendEvent(withCategory: "Map", action: "Tap", label: "Existing Forecast", value: nil)
+                        Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
                         return false
                     }
                 }

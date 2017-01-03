@@ -41,9 +41,8 @@ func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: 
                     completion(nil, forecast)
                     let endTime = DispatchTime.now()
                     let nanoTime = endTime.uptimeNanoseconds - startTime.uptimeNanoseconds
-                    let milliTime = NSNumber(value: Double(nanoTime) / 1_000_000)
-                    sendTimeEvent(withCategory: "map", interval: milliTime, name: "Forecast Load Time", label: nil)
-
+                    let milliTime = NSNumber(value: Int(Double(nanoTime) / 1_000_000))
+                    Analytics.sendTimeEvent(category: "Map", interval: milliTime, name: "Forecast Load Time", label: nil)
                 }
                 else {
                     completion("No weather found", nil)
