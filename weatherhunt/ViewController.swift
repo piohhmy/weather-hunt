@@ -74,6 +74,13 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     
     override func viewWillAppear(_ animated: Bool) {
         Analytics.sendScreenName(value: "Map")
+        super.viewWillAppear(animated)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        adjustDatePickerSize()
+        super.viewDidAppear(animated)
     }
     
     func registerForRotationEvents() {
