@@ -80,7 +80,9 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     
     override func viewDidAppear(_ animated: Bool) {
         adjustDatePickerSize()
+        self.loadingSubview.updateSize()
         super.viewDidAppear(animated)
+        
     }
     
     func registerForRotationEvents() {
