@@ -31,5 +31,8 @@ else
   
   ## iPad Pro App 83.5pt
   convert "$base" -resize 167x167!   "Icon-83.5@2x.png"
+
+  ## Store Icon
+  convert "$base" -resize 1024x1024!   "Icon-1024.png"
  fi 
 
