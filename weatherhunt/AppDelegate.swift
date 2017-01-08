@@ -17,6 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Analytics.setup()
+        
+        // Set Mapbox access token
+        let secretFile = Bundle.main.path(forResource: "Secret", ofType: "plist")!
+        let secretDict = NSDictionary(contentsOfFile: secretFile)!
+        MGLAccountManager.setAccessToken(secretDict["MGLMapboxAccessToken"] as? String)
+        
         return true
     }
 

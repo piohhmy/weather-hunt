@@ -8,6 +8,8 @@ target 'weatherhunt' do
   # Pods for weatherhunt
   pod 'Google/Analytics'
 
+  pod 'Mapbox-iOS-SDK', '~> 3.3.7'
+
   target 'weatherhuntTests' do
     inherit! :search_paths
     # Pods for testing

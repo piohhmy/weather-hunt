@@ -22,12 +22,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HEF-sn-prU">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="paX-RY-6zf" customClass="MGLMapView">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <gestureRecognizers/>
-                            </mapView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/piohhmy/cixnypbrm001c2snuqqhf0se0"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-OY-5fw">
-                                <rect key="frame" x="-0.5" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="Clear" style="plain" id="2NG-pC-fGZ">
                                         <connections>
@@ -52,7 +55,7 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap For Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgt-Kw-liC">
-                                <rect key="frame" x="129.5" y="32.5" width="116" height="20"/>
+                                <rect key="frame" x="130" y="32" width="116" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -81,22 +84,23 @@
                         <constraints>
                             <constraint firstItem="Zgt-Kw-liC" firstAttribute="centerY" secondItem="TNV-OY-5fw" secondAttribute="centerY" id="16T-Po-fhc"/>
                             <constraint firstItem="Zgt-Kw-liC" firstAttribute="centerX" secondItem="TNV-OY-5fw" secondAttribute="centerX" id="1MQ-E5-B7O"/>
-                            <constraint firstItem="TNV-OY-5fw" firstAttribute="centerX" secondItem="HEF-sn-prU" secondAttribute="centerX" id="CQU-Ty-Sff"/>
-                            <constraint firstItem="3bd-fR-RWv" firstAttribute="centerX" secondItem="HEF-sn-prU" secondAttribute="centerX" id="CaF-PW-mcz"/>
-                            <constraint firstItem="3bd-fR-RWv" firstAttribute="width" secondItem="HEF-sn-prU" secondAttribute="width" id="QZj-Om-cE9"/>
-                            <constraint firstItem="3bd-fR-RWv" firstAttribute="bottom" secondItem="HEF-sn-prU" secondAttribute="bottom" id="bPW-RU-odd"/>
-                            <constraint firstItem="HEF-sn-prU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fIz-zU-06i"/>
-                            <constraint firstItem="TNV-OY-5fw" firstAttribute="width" secondItem="HEF-sn-prU" secondAttribute="width" id="gfw-jv-pwc"/>
-                            <constraint firstItem="HEF-sn-prU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="klh-mW-dE1"/>
-                            <constraint firstItem="HEF-sn-prU" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="mab-mx-NpJ"/>
-                            <constraint firstItem="TNV-OY-5fw" firstAttribute="top" secondItem="HEF-sn-prU" secondAttribute="top" id="z7j-A0-EDr"/>
-                            <constraint firstItem="HEF-sn-prU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zFx-fc-CJ6"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="7Cu-KU-dzW"/>
+                            <constraint firstItem="paX-RY-6zf" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="DVv-nO-3SB"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Fbi-q2-jJr"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NWA-7c-L1a"/>
+                            <constraint firstItem="paX-RY-6zf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="amR-Hi-GFY"/>
+                            <constraint firstItem="TNV-OY-5fw" firstAttribute="top" secondItem="paX-RY-6zf" secondAttribute="top" id="eJQ-Kl-E5T"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="centerX" secondItem="Zgt-Kw-liC" secondAttribute="centerX" id="hOM-DZ-qoI"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="centerX" secondItem="paX-RY-6zf" secondAttribute="centerX" id="hcV-H0-voR"/>
+                            <constraint firstItem="TNV-OY-5fw" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="jOw-7I-Vi2"/>
+                            <constraint firstItem="TNV-OY-5fw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qTJ-qN-Hl2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="paX-RY-6zf" secondAttribute="bottom" id="rCY-GQ-qvV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="datePicker" destination="3bd-fR-RWv" id="eB6-j1-eJ6"/>
                         <outlet property="headerLabel" destination="Zgt-Kw-liC" id="DQN-NL-ZeQ"/>
-                        <outlet property="mapView" destination="HEF-sn-prU" id="Vp3-CR-53c"/>
+                        <outlet property="mapView" destination="paX-RY-6zf" id="39l-lG-iYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

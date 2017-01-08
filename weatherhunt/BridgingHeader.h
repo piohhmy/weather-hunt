@@ -10,5 +10,6 @@
 #define BridgingHeader_h
 
 #import <Google/Analytics.h>
+@import Mapbox;
 
 #endif /* BridgingHeader_h */
