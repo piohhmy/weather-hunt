@@ -24,19 +24,17 @@ extension Date {
 }
 
 
-class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate{
+class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate{
+    @IBOutlet weak var mapView: MGLMapView!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var datePicker: UISegmentedControl!
-    @IBOutlet weak var  mapView: MKMapView!
     @IBAction func dateChanged(_ sender: Any) {
-        for an in mapView.annotations {
-            if let an = an as? WeatherAnnotation {
-                an.switchTo(day: datePicker.selectedSegmentIndex)
-                Analytics.sendEvent(category: "Map", action: "Change Date", label: nil, value: nil)
-                if let view = mapView.view(for: an) {
-                    update(annoationView: view, with: an)
-                }
-            }
+        Analytics.sendEvent(category: "Map", action: "Change Date", label: nil, value: nil)
+        if let annotations = mapView.annotations {
+            let oldAnnotations = annotations.flatMap { $0 as? WeatherAnnotation }
+            let newAnnotations = oldAnnotations.map { $0.switchTo(day: datePicker.selectedSegmentIndex) }
+            mapView.removeAnnotations(oldAnnotations)
+            mapView.addAnnotations(newAnnotations)
         }
     }
     let badNetworkMsg = "Oops. No Network"
@@ -46,11 +44,13 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     @IBAction func touchRecognizer(_ sender: Any) {}
 
     @IBAction func clearMap(_ sender: Any) {
-        let weatherAnnotations = mapView.annotations.flatMap { an in an as? WeatherAnnotation }
+        if let annotations = mapView.annotations {
+            let weatherAnnotations = annotations.flatMap { an in an as? WeatherAnnotation }
+            mapView.removeAnnotations(weatherAnnotations)
+            Analytics.sendEvent(category: "Map", action: "Clear", label: nil, value: nil)
+        }
         
-        mapView.removeAnnotations(weatherAnnotations)
-        Analytics.sendEvent(category: "Map", action: "Clear", label: nil, value: nil)
-
+       
     }
     var loadingSubview : LoadingSubview!
 
@@ -113,8 +113,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last {
             print("Users Location at \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
-            let viewRegion = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, 300000, 300000)
-            mapView.setRegion(viewRegion, animated: true)
+            mapView.setCenter(currentLocation.coordinate, zoomLevel: 7, animated: true)
         }
     }
     
@@ -211,31 +210,36 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let weatherAnnotations = mapView.annotations.flatMap({$0 as? WeatherAnnotation})
-        for targetAn: WeatherAnnotation in weatherAnnotations  {
-            for otherAn: WeatherAnnotation in weatherAnnotations {
-                if targetAn.isOverlapping(other: otherAn, on: mapView){
-                    mapView.removeAnnotation(otherAn)
+    func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
+        if let annotations = mapView.annotations {
+            let weatherAnnotations = annotations.flatMap({$0 as? WeatherAnnotation})
+            for targetAn: WeatherAnnotation in weatherAnnotations  {
+                for otherAn: WeatherAnnotation in weatherAnnotations {
+                    if targetAn.isOverlapping(other: otherAn, on: mapView){
+                        mapView.removeAnnotation(otherAn)
+                    }
                 }
             }
+
         }
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if (touch.view as? MKAnnotationView) != nil {
+        if (touch.view as? MGLAnnotationView) != nil {
             Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
             print("Ignore tap on existing annotation")
             return false
         }
         else {
             let p = touch.location(in: mapView)
-            for annotation: MKAnnotation in mapView.annotations {
-                if let weatherAnnotation = annotation as? WeatherAnnotation {
-                    if weatherAnnotation.isOverlapping(with: p, on: mapView) {
-                        print("Ignore tap nearby existing annotation")
-                        Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
-                        return false
+            if let annotations = mapView.annotations {
+                for annotation: MGLAnnotation in annotations {
+                    if let weatherAnnotation = annotation as? WeatherAnnotation {
+                        if weatherAnnotation.isOverlapping(with: p, on: mapView) {
+                            print("Ignore tap nearby existing annotation")
+                            Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
+                            return false
+                        }
                     }
                 }
             }
@@ -243,35 +247,27 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         return true
     }
     
-    func update(annoationView view: MKAnnotationView, with annotation: WeatherAnnotation) {
-        view.annotation = annotation
-        if(annotation.isViewable) {
-            view.image = annotation.image
-            view.isHidden = false
-        }
-        else {
-            print("annotation not available for \(annotation.coordinate)")
-            view.isHidden = true
-        }
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        // Always try to show a callout when an annotation is tapped.
+        return true
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         if let weatherAnnotation = annotation as? WeatherAnnotation {
             let annotationIdentifier = "weather-annotation"
-            if let existingView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-                update(annoationView: existingView, with: weatherAnnotation)
+            if let existingView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) as? WeatherAnnotationView {
+                existingView.update(with: weatherAnnotation)
                 return existingView
             } else {
-                let newView = MKAnnotationView.init(annotation: weatherAnnotation, reuseIdentifier: annotationIdentifier)
-                newView.canShowCallout = true
-                update(annoationView: newView, with: weatherAnnotation)
+                let newView = WeatherAnnotationView.init(annotation: weatherAnnotation, reuseIdentifier: annotationIdentifier)
                 return newView
             }
         }
         return nil
     }
     
-    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+    func mapView(_ mapView: MGLMapView, didAdd views: [MGLAnnotationView]) {
         let weatherAns = views.flatMap { view in view.annotation as? WeatherAnnotation }
         if(weatherAns.count > 0) {
             mapView.selectAnnotation(weatherAns[0], animated: true)

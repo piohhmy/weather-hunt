@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-import MapKit
+import Mapbox
+
 
 let conditionImages = [
     "Sunny": #imageLiteral(resourceName: "sun"),
@@ -109,7 +110,7 @@ let conditionImages = [
     ]
 
 
-class WeatherAnnotation: MKPointAnnotation {
+class WeatherAnnotation: MGLPointAnnotation {
     var image:UIImage? = nil
     let forecast:Forecast
     var isViewable : Bool {
@@ -120,12 +121,24 @@ class WeatherAnnotation: MKPointAnnotation {
         self.forecast = forecast
         super.init()
         self.coordinate = forecast.location
-        switchTo(day: day)
-
         
+        if let weather = try? forecast.on(day: day) {
+            self.image = conditionImages[weather.condition]
+            self.title = weather.condition
+            self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
+            if (self.image == nil) {
+                Analytics.sendException(description: "No image for \(weather.condition)", isFatal: false)
+            }
+        }
+        else {
+            self.image = nil
+            self.title = ""
+            self.subtitle = ""
+        }
+
     }
     
-    func isOverlapping(other annotation: WeatherAnnotation, on mapView: MKMapView) -> Bool{
+    func isOverlapping(other annotation: WeatherAnnotation, on mapView: MGLMapView) -> Bool{
         if let anView1 = mapView.view(for: self) {
             if let anView2 = mapView.view(for: annotation) {
                 let annotationPoint1 = CGPoint.init(x: anView1.frame.midX, y: anView1.frame.midY)
@@ -136,22 +149,12 @@ class WeatherAnnotation: MKPointAnnotation {
         return false
     }
     
-    func switchTo(day: Int) {
-        if let weather = try? forecast.on(day: day) {
-            self.image = conditionImages[weather.condition]
-            self.title = weather.condition
-            self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
-            if (self.image == nil) {
-                Analytics.sendException(description: "No image for \(weather.condition)", isFatal: false)
-            }
-        } else {
-            self.image = nil
-            self.title = ""
-            self.subtitle = ""
-        }
+    
+    func switchTo(day: Int) -> WeatherAnnotation {
+        return WeatherAnnotation.init(from: forecast, on: day)
     }
     
-    func isOverlapping(with point: CGPoint, on mapView: MKMapView) -> Bool {
+    func isOverlapping(with point: CGPoint, on mapView: MGLMapView) -> Bool {
         if let anView = mapView.view(for: self) {
             let annotationPoint = CGPoint.init(x: anView.frame.midX, y: anView.frame.midY)
             return isOverlapping(p1: annotationPoint, p2: point)
