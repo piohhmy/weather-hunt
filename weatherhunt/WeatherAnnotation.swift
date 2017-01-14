@@ -138,6 +138,10 @@ class WeatherAnnotation: MGLPointAnnotation {
 
     }
     
+    func switchTo(day: Int) -> WeatherAnnotation {
+        return WeatherAnnotation.init(from: forecast, on: day)
+    }
+    
     func isOverlapping(other annotation: WeatherAnnotation, on mapView: MGLMapView) -> Bool{
         if let anView1 = mapView.view(for: self) {
             if let anView2 = mapView.view(for: annotation) {
@@ -147,11 +151,6 @@ class WeatherAnnotation: MGLPointAnnotation {
             }
         }
         return false
-    }
-    
-    
-    func switchTo(day: Int) -> WeatherAnnotation {
-        return WeatherAnnotation.init(from: forecast, on: day)
     }
     
     func isOverlapping(with point: CGPoint, on mapView: MGLMapView) -> Bool {
