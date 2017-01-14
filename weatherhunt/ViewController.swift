@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Pulley
 
 extension Date {
     func shortDayOfTheWeek() -> String? {
@@ -23,22 +24,21 @@ extension Date {
     }
 }
 
+protocol ForecastDelegate {
+    func onNewForecast(_ forecast: Forecast)
+    func onSelectForecast(_ forecast: Forecast)
+}
 
-class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate{
+class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate, DatePickerDelegate {
     @IBOutlet weak var mapView: MGLMapView!
     @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var datePicker: UISegmentedControl!
-    @IBAction func dateChanged(_ sender: Any) {
-        Analytics.sendEvent(category: "Map", action: "Change Date", label: nil, value: nil)
-        if let annotations = mapView.annotations {
-            let oldAnnotations = annotations.flatMap { $0 as? WeatherAnnotation }
-            let newAnnotations = oldAnnotations.map { $0.switchTo(day: datePicker.selectedSegmentIndex) }
-            mapView.removeAnnotations(oldAnnotations)
-            mapView.addAnnotations(newAnnotations)
-        }
-    }
+    
+    var forecastDelegate: ForecastDelegate?
+    
+    
     let badNetworkMsg = "Oops. No Network"
     let locationManager = CLLocationManager()
+    var dateIndex: Int = 0
 
     
     @IBAction func touchRecognizer(_ sender: Any) {}
@@ -60,9 +60,7 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
             headerLabel.text = badNetworkMsg
             Analytics.sendEvent(category: "Map", action: "Display", label: badNetworkMsg, value: nil)
         }
-        registerForRotationEvents()
-
-        datePicker.isHidden = true
+        
         mapView.delegate = self
         mapView.isRotateEnabled = false
 
@@ -79,14 +77,9 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     
     
     override func viewDidAppear(_ animated: Bool) {
-        adjustDatePickerSize()
         self.loadingSubview.updateSize()
         super.viewDidAppear(animated)
         
-    }
-    
-    func registerForRotationEvents() {
-         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     func setupUserLocation() {
@@ -105,6 +98,18 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
             mapView.showsUserLocation = true
         }
     }
+    
+    func dateChanged(newDate date: Date, atIndex index:Int) {
+        Analytics.sendEvent(category: "Map", action: "Change Date", label: nil, value: nil)
+        if let annotations = mapView.annotations {
+            let oldAnnotations = annotations.flatMap { $0 as? WeatherAnnotation }
+            let newAnnotations = oldAnnotations.map { $0.switchTo(day: index) }
+            mapView.removeAnnotations(oldAnnotations)
+            mapView.addAnnotations(newAnnotations)
+            self.dateIndex = index
+        }
+    }
+
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         showUserLocation()
@@ -135,39 +140,6 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     }
     
     
-    func setupDatePicker(for forecast: Forecast) {
-        datePicker.isHidden = false
-        UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 2
-        
-        for day in 0...6 {
-            if let weather = try? forecast.on(day: day) {
-                if datePicker.numberOfSegments <= day {
-                    datePicker.insertSegment(withTitle: "", at: day, animated: true)
-                }
-                datePicker.setTitle("\(weather.date.shortDayOfTheWeek()!)\n\(weather.date.shortDate()!)", forSegmentAt: day)
-            }
-        }
-        
-        adjustDatePickerSize()
-        datePicker.isHidden = false
-    }
-    
-    func adjustDatePickerSize() {
-        let segments = datePicker.numberOfSegments
-        for day in 0...segments-1 {
-            datePicker.setWidth(self.view.bounds.size.width/CGFloat(segments), forSegmentAt: day)
-        }
-        
-        // Labels don't seem to get proper bounding frame with multiline strings in SegmentedControl, set manually
-        for segment in self.datePicker.subviews {
-            for subview in segment.subviews {
-                if let titleLabel = subview as? UILabel {
-                    titleLabel.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(97), height: CGFloat(50))
-                }
-            }
-        }
-    }
-    
     func onReceiveForecast(err: String?, forecast: Forecast?) {
         defer {
             DispatchQueue.main.async {
@@ -175,11 +147,11 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
             }
         }
         if let forecast = forecast {
-            let annotation = WeatherAnnotation(from: forecast, on: datePicker.selectedSegmentIndex)
+            let annotation = WeatherAnnotation(from: forecast, on: self.dateIndex)
             
             DispatchQueue.main.async {
+                self.forecastDelegate?.onNewForecast(forecast)
                 self.headerLabel.text = "Tap For Weather"
-                self.setupDatePicker(for: forecast)
                 self.mapView.addAnnotation(annotation)
             }
         }
@@ -225,37 +197,24 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if (touch.view as? MGLAnnotationView) != nil {
+        if let weatherView = touch.view as? WeatherAnnotationView {
             Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
             print("Ignore tap on existing annotation")
+            self.forecastDelegate?.onSelectForecast(weatherView.weatherAnnotation!.forecast)
             return false
-        }
-        else {
-            let p = touch.location(in: mapView)
-            if let annotations = mapView.annotations {
-                for annotation: MGLAnnotation in annotations {
-                    if let weatherAnnotation = annotation as? WeatherAnnotation {
-                        if weatherAnnotation.isOverlapping(with: p, on: mapView) {
-                            print("Ignore tap nearby existing annotation")
-                            Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
-                            return false
-                        }
-                    }
-                }
-            }
         }
         return true
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-        // Always try to show a callout when an annotation is tapped.
-        return true
+        return false
     }
     
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         if let weatherAnnotation = annotation as? WeatherAnnotation {
             let annotationIdentifier = "weather-annotation"
+            // TODO: Test reusable annotation views
             if let existingView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) as? WeatherAnnotationView {
                 existingView.update(with: weatherAnnotation)
                 return existingView
@@ -268,10 +227,13 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     }
     
     func mapView(_ mapView: MGLMapView, didAdd views: [MGLAnnotationView]) {
-        let weatherAns = views.flatMap { view in view.annotation as? WeatherAnnotation }
-        if(weatherAns.count > 0) {
-            mapView.selectAnnotation(weatherAns[0], animated: true)
+        if let annotation = views[0].annotation {
+            mapView.selectAnnotation(annotation, animated: true)
         }
+    }
+    
+    func mapView(_ mapView: MGLMapView, didSelect annotationView: MGLAnnotationView) {
+        
     }
 }
 

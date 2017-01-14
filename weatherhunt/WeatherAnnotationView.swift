@@ -18,9 +18,12 @@ class WeatherAnnotationView: MGLAnnotationView {
         let maxAlpha: CGFloat = 0.25
         frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         backgroundColor = UIColor.red.withAlphaComponent(maxAlpha)
-        layer.borderColor = UIColor.white.withAlphaComponent(maxAlpha).cgColor
         layer.borderWidth = 2
-        layer.cornerRadius = 20
+        layer.cornerRadius = frame.width / 2
+        layer.borderColor = UIColor.white.cgColor
+        //layer.borderColor = UIColor.white.withAlphaComponent(maxAlpha).cgColor
+
+
         iconSubview = UIImageView.init()
         iconSubview?.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         iconSubview?.center = self.convert(self.center, from: iconSubview)
@@ -28,6 +31,7 @@ class WeatherAnnotationView: MGLAnnotationView {
         self.addSubview(iconSubview!)
 
         update(with: annotation)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,23 +56,17 @@ class WeatherAnnotationView: MGLAnnotationView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        // Force the annotation view to maintain a constant size when the map is tilted.
-        scalesWithViewingDistance = false
-        
-        // Use CALayer’s corner radius to turn this view into a circle.
-        layer.cornerRadius = frame.width / 2
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         // Animate the border width in/out, creating an iris effect.
         let animation = CABasicAnimation(keyPath: "borderWidth")
         animation.duration = 0.1
         layer.borderWidth = selected ? frame.width / 4 : 2
         layer.add(animation, forKey: "borderWidth")
+        
+
     }
 }

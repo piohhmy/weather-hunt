@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Pulley
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+
         // Override point for customization after application launch.
         Analytics.setup()
         
@@ -22,6 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let secretFile = Bundle.main.path(forResource: "Secret", ofType: "plist")!
         let secretDict = NSDictionary(contentsOfFile: secretFile)!
         MGLAccountManager.setAccessToken(secretDict["MGLMapboxAccessToken"] as? String)
+        
+        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "map") as! ViewController
+        let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "drawer") as! DrawerController
+        
+        mainContentVC.forecastDelegate = drawerContentVC
+        drawerContentVC.delegate = mainContentVC
+        
+        let pulleyDrawerVC = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
+        
+        window?.rootViewController = pulleyDrawerVC
+        
+        
+        window?.makeKeyAndVisible()
         
         return true
     }
