@@ -20,7 +20,7 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
     @IBOutlet weak var highTempLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet var drawerView: UIView!
-    @IBOutlet weak var datePicker: DatePicker!
+    @IBOutlet weak var datePicker: UISegmentedControl!
     @IBAction func dateChanged(_ sender: Any) {
         delegate?.dateChanged(newDate: Date(), atIndex: datePicker.selectedSegmentIndex)
         updateLabels()
@@ -34,7 +34,9 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
         datePicker.isHidden = true
     
         //datePicker.adjustDatePickerSize()
-        //registerForRotationEvents()
+        registerForRotationEvents()
+        UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 2
+
     }
     func collapsedDrawerHeight() -> CGFloat {
         return 60.0
@@ -63,7 +65,7 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
     }
     
     func onNewForecast(_ forecast: Forecast) {
-        datePicker.setup(with: forecast)
+        self.setupDatePicker(with: forecast)
         if let drawer = self.parent as? PulleyViewController
         {
             if drawer.drawerPosition != .partiallyRevealed {
@@ -83,8 +85,41 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
     
     // Todo: test rotate
     func registerForRotationEvents() {
-        NotificationCenter.default.addObserver(self, selector: #selector(datePicker.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
+    
+    func setupDatePicker(with forecast: Forecast) {
+        
+        for day in 0...6 {
+            if let weather = try? forecast.on(day: day) {
+                if datePicker.numberOfSegments <= day {
+                    datePicker.insertSegment(withTitle: "", at: day, animated: false)
+                    
+                }
+                datePicker.setTitle("\(weather.date.shortDayOfTheWeek()!)\n\(weather.date.shortDate()!)", forSegmentAt: day)
+            }
+        }
+        
+        adjustDatePickerSize()
+        datePicker.isHidden = false
+    }
+    
+    func adjustDatePickerSize() {
+        let segments = datePicker.numberOfSegments
+        for day in 0...segments-1 {
+            datePicker.setWidth(datePicker.bounds.size.width/CGFloat(segments), forSegmentAt: day)
+        }
+        
+        // Labels don't seem to get proper bounding frame with multiline strings in SegmentedControl, set manually
+        for segment in datePicker.subviews {
+            for subview in segment.subviews {
+                if let titleLabel = subview as? UILabel {
+                    titleLabel.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(97), height: CGFloat(50))
+                }
+            }
+        }
+    }
+
 
     
 }
