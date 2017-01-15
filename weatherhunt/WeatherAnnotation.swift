@@ -122,21 +122,9 @@ class WeatherAnnotation: MGLPointAnnotation {
         super.init()
         self.coordinate = forecast.location
         
-        if let weather = try? forecast.on(day: day) {
-            self.image = conditionImages[weather.condition]
-            self.title = weather.condition
-            self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
-            if (self.image == nil) {
-                Analytics.sendException(description: "No image for \(weather.condition)", isFatal: false)
-            }
-        }
-        else {
-            self.image = nil
-            self.title = ""
-            self.subtitle = ""
-        }
-
+        self.switchTo(day: day)
     }
+    
     
     func switchTo(day: Int)  {
         if let weather = try? forecast.on(day: day) {
@@ -152,8 +140,6 @@ class WeatherAnnotation: MGLPointAnnotation {
             self.title = ""
             self.subtitle = ""
         }
-
-        //return WeatherAnnotation.init(from: forecast, on: day)
     }
     
     func isOverlapping(other annotation: WeatherAnnotation, on mapView: MGLMapView) -> Bool{
