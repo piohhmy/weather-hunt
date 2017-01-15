@@ -33,7 +33,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     }
     
     func setupMailView() {
-        let subject = "Feedback on Weather Hunter"
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        let subject = "feedback on weatherhunt v" + version
         let toRecipents = ["support@weatherhunt.com"]
         let mc = MFMailComposeViewController()
         mc.mailComposeDelegate = self
