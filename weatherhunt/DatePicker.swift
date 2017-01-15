@@ -35,8 +35,9 @@ class DatePicker: UISegmentedControl {
         }
         
         // Labels don't seem to get proper bounding frame with multiline strings in SegmentedControl, set manually
-        let font = UIFont(name: "HelveticaNeue-Thin", size: 14)
-        self.setTitleTextAttributes([NSFontAttributeName: font!], for: .normal)
+        //let font = UIFont(name: "HelveticaNeue-Thin", size: 14)
+
+        //self.setTitleTextAttributes([NSFontAttributeName: font!], for: .normal)
 
         for segment in self.subviews {
             for subview in segment.subviews {

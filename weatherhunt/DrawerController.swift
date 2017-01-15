@@ -80,7 +80,8 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
         updateLabels()
     }
 
-        
+    
+    // Todo: test rotate
     func registerForRotationEvents() {
         NotificationCenter.default.addObserver(self, selector: #selector(datePicker.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }

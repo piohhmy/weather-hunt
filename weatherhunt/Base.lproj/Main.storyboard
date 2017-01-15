@@ -182,7 +182,7 @@ Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3bd-fR-RWv" customClass="DatePicker" customModule="weatherhunt" customModuleProvider="target">
-                                <rect key="frame" x="5" y="13" width="365" height="41"/>
+                                <rect key="frame" x="16" y="13" width="343" height="41"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ohc-mX-tTm"/>
@@ -210,10 +210,10 @@ Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdy-r3-d9G">
-                                <rect key="frame" x="5" y="61" width="375" height="185"/>
+                                <rect key="frame" x="0.0" y="61" width="375" height="185"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vK5-R9-vAZ">
-                                        <rect key="frame" x="2" y="8" width="110" height="110"/>
+                                        <rect key="frame" x="16" y="8" width="110" height="110"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="110" id="3Qb-K3-vGU"/>
@@ -221,19 +221,19 @@ Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunny with chance of showers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTG-4f-ePP" userLabel="Conditions Label">
-                                        <rect key="frame" x="120" y="8" width="237" height="66.5"/>
+                                        <rect key="frame" x="134" y="8" width="233" height="33.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="28"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="75°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72w-st-6W0" userLabel="High Temp">
-                                        <rect key="frame" x="120" y="70.5" width="61" height="47.5"/>
+                                        <rect key="frame" x="134" y="70.5" width="61" height="47.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="low of 56°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1t-U0-Svp" userLabel="Low Temp">
-                                        <rect key="frame" x="184" y="85.5" width="90" height="32.5"/>
+                                        <rect key="frame" x="198" y="85.5" width="90" height="32.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -241,12 +241,11 @@ Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="72w-st-6W0" firstAttribute="bottom" secondItem="vK5-R9-vAZ" secondAttribute="bottom" id="5eP-E3-YGD"/>
-                                    <constraint firstAttribute="trailing" secondItem="FTG-4f-ePP" secondAttribute="trailing" constant="18" id="HAD-3e-AKb"/>
+                                    <constraint firstItem="FTG-4f-ePP" firstAttribute="trailing" secondItem="sdy-r3-d9G" secondAttribute="trailingMargin" id="HAD-3e-AKb"/>
                                     <constraint firstItem="FTG-4f-ePP" firstAttribute="leading" secondItem="vK5-R9-vAZ" secondAttribute="trailing" constant="8" id="Yci-uK-6qF"/>
                                     <constraint firstAttribute="height" constant="185" id="dgq-zP-UGQ"/>
                                     <constraint firstItem="G1t-U0-Svp" firstAttribute="bottom" secondItem="vK5-R9-vAZ" secondAttribute="bottom" id="fU6-Pf-wIM"/>
                                     <constraint firstItem="G1t-U0-Svp" firstAttribute="height" secondItem="72w-st-6W0" secondAttribute="height" constant="-15" id="fUz-oQ-GTD"/>
-                                    <constraint firstItem="vK5-R9-vAZ" firstAttribute="leading" secondItem="sdy-r3-d9G" secondAttribute="leading" constant="2" id="hfQ-2p-mvf"/>
                                     <constraint firstItem="G1t-U0-Svp" firstAttribute="leading" secondItem="72w-st-6W0" secondAttribute="trailing" constant="3" id="lJc-iL-Pvm"/>
                                     <constraint firstItem="FTG-4f-ePP" firstAttribute="top" secondItem="vK5-R9-vAZ" secondAttribute="top" id="om2-ZU-SOp"/>
                                     <constraint firstItem="72w-st-6W0" firstAttribute="leading" secondItem="FTG-4f-ePP" secondAttribute="leading" id="ygC-Ys-YgU"/>
@@ -255,14 +254,15 @@ Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3bd-fR-RWv" firstAttribute="centerX" secondItem="AQ0-za-KPN" secondAttribute="centerX" id="2cZ-dD-9iB"/>
-                            <constraint firstItem="3bd-fR-RWv" firstAttribute="width" secondItem="AQ0-za-KPN" secondAttribute="width" constant="-10" id="4Rt-Vm-pyJ"/>
                             <constraint firstItem="3bd-fR-RWv" firstAttribute="top" secondItem="IEx-L3-6sQ" secondAttribute="top" constant="8" id="6DD-Nf-Dvk"/>
+                            <constraint firstItem="sdy-r3-d9G" firstAttribute="centerX" secondItem="AQ0-za-KPN" secondAttribute="centerX" id="751-7b-H7X"/>
+                            <constraint firstItem="sdy-r3-d9G" firstAttribute="width" secondItem="AQ0-za-KPN" secondAttribute="width" id="7kV-G9-O4m"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="trailing" secondItem="AQ0-za-KPN" secondAttribute="trailingMargin" id="HTD-cg-fmY"/>
                             <constraint firstItem="sdy-r3-d9G" firstAttribute="top" secondItem="3bd-fR-RWv" secondAttribute="bottom" constant="8" id="OzM-QS-c4O"/>
-                            <constraint firstItem="sdy-r3-d9G" firstAttribute="leading" secondItem="AQ0-za-KPN" secondAttribute="leadingMargin" constant="-11" id="cSI-ej-QKZ"/>
+                            <constraint firstItem="3bd-fR-RWv" firstAttribute="leading" secondItem="AQ0-za-KPN" secondAttribute="leadingMargin" id="Vzz-K2-0G6"/>
+                            <constraint firstItem="vK5-R9-vAZ" firstAttribute="leading" secondItem="AQ0-za-KPN" secondAttribute="leadingMargin" id="btE-qZ-KsJ"/>
                             <constraint firstItem="IEx-L3-6sQ" firstAttribute="top" secondItem="AQ0-za-KPN" secondAttribute="topMargin" constant="5" id="cvd-F2-C86"/>
                             <constraint firstItem="IEx-L3-6sQ" firstAttribute="centerX" secondItem="AQ0-za-KPN" secondAttribute="centerX" id="f63-Od-pAN"/>
-                            <constraint firstItem="sdy-r3-d9G" firstAttribute="width" secondItem="AQ0-za-KPN" secondAttribute="width" id="mCa-hg-vZ1"/>
                             <constraint firstItem="vK5-R9-vAZ" firstAttribute="top" secondItem="3bd-fR-RWv" secondAttribute="bottom" constant="16" id="sWB-G6-axi"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
