@@ -24,6 +24,7 @@ let conditionImages = [
     "Increasing Clouds": #imageLiteral(resourceName: "mostlysun"),
     "Decreasing Clouds": #imageLiteral(resourceName: "mostlysun"),
     "Gradual Clearing": #imageLiteral(resourceName: "mostlysun"),
+    "Clearing Late": #imageLiteral(resourceName: "mostlysun"),
     "Cloudy": #imageLiteral(resourceName: "cloudy"),
     "Thunderstorm": #imageLiteral(resourceName: "tstorm"),
     "Thunderstorms": #imageLiteral(resourceName: "tstorm"),
