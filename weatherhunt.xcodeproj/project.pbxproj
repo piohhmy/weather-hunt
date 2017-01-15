@@ -21,7 +21,6 @@
 		B55339951E16DBE0000FC2B6 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55339941E16DBE0000FC2B6 /* InfoViewController.swift */; };
 		B557904A1E216D4500086DED /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55790491E216D4500086DED /* Secret.plist */; };
 		B557904C1E21AE7C00086DED /* WeatherAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557904B1E21AE7C00086DED /* WeatherAnnotationView.swift */; };
-		B56D39311E22D91A00B75BDB /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D39301E22D91A00B75BDB /* DatePicker.swift */; };
 		B56D39331E22DAA200B75BDB /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D39321E22DAA200B75BDB /* DrawerController.swift */; };
 		B58017841E1AEA47006C3279 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B58017831E1AEA47006C3279 /* Launch Screen.xib */; };
 		B58017861E1AEE8C006C3279 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B58017851E1AEE8C006C3279 /* GoogleService-Info.plist */; };
@@ -77,7 +76,6 @@
 		B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherProxyEmptyTestFixture.json; sourceTree = "<group>"; };
 		B55790491E216D4500086DED /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
 		B557904B1E21AE7C00086DED /* WeatherAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAnnotationView.swift; sourceTree = "<group>"; };
-		B56D39301E22D91A00B75BDB /* DatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		B56D39321E22DAA200B75BDB /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		B58017831E1AEA47006C3279 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		B58017851E1AEE8C006C3279 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 				B58017881E1AFD99006C3279 /* Analytics.swift */,
 				B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */,
 				B557904B1E21AE7C00086DED /* WeatherAnnotationView.swift */,
-				B56D39301E22D91A00B75BDB /* DatePicker.swift */,
 				B56D39321E22DAA200B75BDB /* DrawerController.swift */,
 			);
 			path = weatherhunt;
@@ -525,7 +522,6 @@
 				B58017891E1AFD99006C3279 /* Analytics.swift in Sources */,
 				B557904C1E21AE7C00086DED /* WeatherAnnotationView.swift in Sources */,
 				B5EFA4DD1DF29FA700C313F9 /* AppDelegate.swift in Sources */,
-				B56D39311E22D91A00B75BDB /* DatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
