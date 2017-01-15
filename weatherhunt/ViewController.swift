@@ -82,6 +82,14 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
         
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        DispatchQueue.main.async {
+            self.loadingSubview.updateSize()
+        }
+    }
+
+    
     func setupUserLocation() {
         locationManager.delegate = self
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {

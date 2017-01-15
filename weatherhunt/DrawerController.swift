@@ -32,9 +32,6 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.isHidden = true
-    
-        //datePicker.adjustDatePickerSize()
-        registerForRotationEvents()
         UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 2
 
     }
@@ -83,9 +80,11 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
     }
 
     
-    // Todo: test rotate
-    func registerForRotationEvents() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.adjustDatePickerSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        DispatchQueue.main.async {
+            self.adjustDatePickerSize()
+        }
     }
     
     func setupDatePicker(with forecast: Forecast) {
