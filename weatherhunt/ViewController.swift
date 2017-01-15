@@ -101,13 +101,7 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     
     func dateChanged(newDate date: Date, atIndex index:Int) {
         Analytics.sendEvent(category: "Map", action: "Change Date", label: nil, value: nil)
-        if let annotations = mapView.annotations {
-            let oldAnnotations = annotations.flatMap { $0 as? WeatherAnnotation }
-            let newAnnotations = oldAnnotations.map { $0.switchTo(day: index) }
-            mapView.removeAnnotations(oldAnnotations)
-            mapView.addAnnotations(newAnnotations)
-            self.dateIndex = index
-        }
+        self.dateIndex = index
     }
 
     
