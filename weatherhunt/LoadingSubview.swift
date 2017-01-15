@@ -17,12 +17,6 @@ class LoadingSubview : UIActivityIndicatorView {
         self.isUserInteractionEnabled = false
         superview.addSubview(self)
         self.updateSize()
-
-        registerForRotationEvents()
-    }
-    
-    func registerForRotationEvents() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateSize), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     func updateSize() {
