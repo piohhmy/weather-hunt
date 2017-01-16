@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drawerContentVC.delegate = mainContentVC
         
         let pulleyDrawerVC = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
+        pulleyDrawerVC.initialDrawerPosition = .closed
         
         window?.rootViewController = pulleyDrawerVC
         

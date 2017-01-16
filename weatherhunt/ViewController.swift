@@ -48,10 +48,16 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
             let weatherAnnotations = annotations.flatMap { an in an as? WeatherAnnotation }
             mapView.removeAnnotations(weatherAnnotations)
             Analytics.sendEvent(category: "Map", action: "Clear", label: nil, value: nil)
+            closeDrawer()
         }
-        
-       
     }
+    
+    func closeDrawer() {
+        if let drawer = self.parent as? PulleyViewController{
+            drawer.setDrawerPosition(position: .closed, animated: true)
+        }
+    }
+    
     var loadingSubview : LoadingSubview!
 
     override func viewDidLoad() {
