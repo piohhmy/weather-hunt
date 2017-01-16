@@ -62,11 +62,6 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (!Reachability.isConnectedToNetwork()) {
-            headerLabel.text = badNetworkMsg
-            Analytics.sendEvent(category: "Map", action: "Display", label: badNetworkMsg, value: nil)
-        }
-        
         mapView.delegate = self
         mapView.isRotateEnabled = false
 
