@@ -14,8 +14,7 @@ protocol DatePickerDelegate {
     func dateChanged(newDate date:Date, atIndex index:Int)
 }
 
-class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewControllerDelegate {
-    
+class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewControllerDelegate {    
     @IBOutlet weak var lowTempLabel: UILabel!
     @IBOutlet weak var highTempLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
@@ -33,10 +32,9 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
         super.viewDidLoad()
         datePicker.isHidden = true
         UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 2
-
     }
     func collapsedDrawerHeight() -> CGFloat {
-        return 60.0
+        return 66.0
     }
     func partialRevealDrawerHeight() -> CGFloat{
         return 200.0
@@ -52,7 +50,7 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
         if let weather = try? currentForecast!.on(day: datePicker.selectedSegmentIndex) {
             conditionLabel.text = weather.condition
             highTempLabel.text = "\(weather.tempHigh)°"
-            lowTempLabel.text = "with low of \(weather.tempLow)°"
+            lowTempLabel.text = "\(weather.tempLow)°"
         }
         else {
             conditionLabel.text = "Not yet available"
@@ -101,6 +99,7 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
         
         adjustDatePickerSize()
         datePicker.isHidden = false
+
     }
     
     func adjustDatePickerSize() {
