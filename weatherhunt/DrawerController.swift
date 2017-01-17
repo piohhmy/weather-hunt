@@ -15,6 +15,7 @@ protocol DatePickerDelegate {
 }
 
 class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewControllerDelegate {    
+    @IBOutlet weak var conditionImage: UIImageView!
     @IBOutlet weak var lowTempLabel: UILabel!
     @IBOutlet weak var highTempLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
