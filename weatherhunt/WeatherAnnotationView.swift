@@ -64,7 +64,7 @@ class WeatherAnnotationView: MGLAnnotationView {
         // Animate the border width in/out, creating an iris effect.
         let animation = CABasicAnimation(keyPath: "borderWidth")
         animation.duration = 0.1
-        layer.borderWidth = selected ? frame.width / 4 : 2
+        layer.borderWidth = selected ? frame.width / 5 : 2
         layer.add(animation, forKey: "borderWidth")
         
 
