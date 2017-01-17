@@ -183,6 +183,7 @@
 				B5EFA4DE1DF29FA700C313F9 /* ViewController.swift */,
 				B5EFA4E01DF29FA700C313F9 /* Main.storyboard */,
 				B5EFA4E31DF29FA700C313F9 /* Assets.xcassets */,
+				B5B5DAEF1E2DD9C6002E8009 /* weathericons.xcassets */,
 				B58017831E1AEA47006C3279 /* Launch Screen.xib */,
 				B5EFA4E51DF29FA700C313F9 /* LaunchScreen.storyboard */,
 				B5EFA4E81DF29FA700C313F9 /* Info.plist */,
@@ -197,7 +198,6 @@
 				B5B2FBF51E15ABD70030875D /* WeatherAnnotation.swift */,
 				B557904B1E21AE7C00086DED /* WeatherAnnotationView.swift */,
 				B56D39321E22DAA200B75BDB /* DrawerController.swift */,
-				B5B5DAEF1E2DD9C6002E8009 /* weathericons.xcassets */,
 			);
 			path = weatherhunt;
 			sourceTree = "<group>";
