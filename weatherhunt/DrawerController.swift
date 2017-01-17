@@ -33,6 +33,7 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
         super.viewDidLoad()
         datePicker.isHidden = true
         UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 2
+        
     }
     func collapsedDrawerHeight() -> CGFloat {
         return 66.0
@@ -52,6 +53,8 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
             conditionLabel.text = weather.condition
             highTempLabel.text = "\(weather.tempHigh)°"
             lowTempLabel.text = "\(weather.tempLow)°"
+            conditionImage.image = weather.imageLarge
+
         }
         else {
             conditionLabel.text = "Not yet available"

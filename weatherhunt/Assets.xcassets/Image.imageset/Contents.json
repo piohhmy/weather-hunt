@@ -2,159 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "display-gamut" : "sRGB"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "1x",
-      "display-gamut" : "display-P3"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x",
-      "display-gamut" : "sRGB"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x",
-      "display-gamut" : "display-P3"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x",
-      "display-gamut" : "sRGB"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x",
-      "display-gamut" : "display-P3"
-    },
-    {
-      "idiom" : "universal",
-      "display-gamut" : "sRGB",
-      "height-class" : "regular",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "display-gamut" : "display-P3",
-      "height-class" : "regular",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "display-gamut" : "sRGB",
-      "height-class" : "regular",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "display-gamut" : "display-P3",
-      "height-class" : "regular",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "display-gamut" : "sRGB",
-      "height-class" : "regular",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "display-gamut" : "display-P3",
-      "height-class" : "regular",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "sRGB",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "display-P3",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "sRGB",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "display-P3",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "sRGB",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "display-P3",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "sRGB",
-      "height-class" : "regular",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "display-P3",
-      "height-class" : "regular",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "sRGB",
-      "height-class" : "regular",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "display-P3",
-      "height-class" : "regular",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "sRGB",
-      "height-class" : "regular",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "width-class" : "compact",
-      "display-gamut" : "display-P3",
-      "height-class" : "regular",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "Cloud-Drizzle-Alt.png",
-      "unassigned" : true,
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "Cloud-Drizzle-Alt@2x.png",
-      "unassigned" : true,
-      "scale" : "2x"
     }
   ],
   "info" : {
