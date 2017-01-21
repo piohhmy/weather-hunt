@@ -103,10 +103,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="KkW-U7-5W7">
-                                <rect key="frame" x="16" y="554" width="343" height="53"/>
+                                <rect key="frame" x="16" y="567" width="343" height="40"/>
                                 <string key="text">Weather data from the NOAA National Weather Service 
-
-Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
+Weather icons by Adam Whitcroft, Climacons
+Maps by © Mapbox, © OpenStreetMap</string>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -123,7 +123,7 @@ Weather icons by Alessio Atzeni, from thenounproject.com collection</string>
                                 </items>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhA-ax-cVe">
-                                <rect key="frame" x="117" y="511" width="142" height="35"/>
+                                <rect key="frame" x="117" y="524" width="142" height="35"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
                                 <state key="normal" title="Provide Feedback">
                                     <color key="titleShadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>

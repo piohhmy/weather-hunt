@@ -64,6 +64,7 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
         super.viewDidLoad()
         mapView.delegate = self
         mapView.isRotateEnabled = false
+        mapView.attributionButton.isHidden = true
 
         self.setupUserLocation()
         self.setupTapRecognizer()
