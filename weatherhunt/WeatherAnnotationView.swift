@@ -25,7 +25,8 @@ class WeatherAnnotationView: MGLAnnotationView {
 
 
         iconSubview = UIImageView.init()
-        iconSubview?.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        iconSubview?.contentMode = UIViewContentMode.scaleAspectFit
+        iconSubview?.frame = CGRect(x: 0, y: 0, width: 24, height: 20)
         iconSubview?.center = self.convert(self.center, from: iconSubview)
 
         self.addSubview(iconSubview!)
