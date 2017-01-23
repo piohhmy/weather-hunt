@@ -17,10 +17,11 @@ class WeatherAnnotationView: MGLAnnotationView {
         self.weatherAnnotation = annotation
         let maxAlpha: CGFloat = 0.25
         frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        backgroundColor = UIColor.red.withAlphaComponent(maxAlpha)
+        backgroundColor = UIColor.gray.withAlphaComponent(maxAlpha)
         layer.borderWidth = 2
         layer.cornerRadius = frame.width / 2
         layer.borderColor = UIColor.white.cgColor
+        
         //layer.borderColor = UIColor.white.withAlphaComponent(maxAlpha).cgColor
 
 
@@ -44,15 +45,21 @@ class WeatherAnnotationView: MGLAnnotationView {
     }
     
     func update(with newAnnotation: WeatherAnnotation) {
-        weatherAnnotation = newAnnotation
+       
         if(newAnnotation.isViewable) {
             self.isHidden = false
-            iconSubview?.image = newAnnotation.image
+            if (iconSubview?.image != newAnnotation.image) {
+                iconSubview?.image = newAnnotation.image
+                animateChangedIcon()
+
+            }
         }
         else {
             print("annotation not available for \(newAnnotation.coordinate)")
             self.isHidden = true
         }
+        weatherAnnotation = newAnnotation
+
     }
     
     override func layoutSubviews() {
@@ -60,14 +67,39 @@ class WeatherAnnotationView: MGLAnnotationView {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
+        NSLog("Selected!")
         super.setSelected(selected, animated: animated)
 
         // Animate the border width in/out, creating an iris effect.
         let animation = CABasicAnimation(keyPath: "borderWidth")
         animation.duration = 0.1
-        layer.borderWidth = selected ? frame.width / 5 : 2
+        layer.borderWidth = selected ? 5 : 2
         layer.add(animation, forKey: "borderWidth")
         
-
+        animateSelectedIcon()
     }
+    
+    func animateSelectedIcon() {
+        UIView.animate(withDuration: 0.1,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0),
+                       initialSpringVelocity: CGFloat(0),
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: { self.iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.2, y: 1.2) : CGAffineTransform(scaleX: 1.0, y: 1.0) },
+                       completion: { (finished: Bool) in }
+        )
+    }
+    
+    func animateChangedIcon() {
+        iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.1, y: 1.1) : CGAffineTransform(scaleX: 0.9, y: 0.9)
+            UIView.animate(withDuration: 1.5,
+                           delay: 0,
+                           usingSpringWithDamping: CGFloat(0.30),
+                           initialSpringVelocity: CGFloat(8.0),
+                           options: UIViewAnimationOptions.allowUserInteraction,
+                           animations: { self.iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.2, y: 1.2) : CGAffineTransform.identity },
+                           completion: { (finished: Bool) in  }
+            )
+    }
+        
 }
