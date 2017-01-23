@@ -85,20 +85,20 @@ class WeatherAnnotationView: MGLAnnotationView {
                        usingSpringWithDamping: CGFloat(0),
                        initialSpringVelocity: CGFloat(0),
                        options: UIViewAnimationOptions.allowUserInteraction,
-                       animations: { self.iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.2, y: 1.2) : CGAffineTransform(scaleX: 1.0, y: 1.0) },
+                       animations: { self.iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.8, y: 0.8) },
                        completion: { (finished: Bool) in }
         )
     }
     
     func animateChangedIcon() {
-        iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.1, y: 1.1) : CGAffineTransform(scaleX: 0.9, y: 0.9)
+        iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.2, y: 1.2) : CGAffineTransform(scaleX: 1.0, y: 1.0)
             UIView.animate(withDuration: 1.5,
                            delay: 0,
                            usingSpringWithDamping: CGFloat(0.30),
                            initialSpringVelocity: CGFloat(8.0),
                            options: UIViewAnimationOptions.allowUserInteraction,
-                           animations: { self.iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.2, y: 1.2) : CGAffineTransform.identity },
-                           completion: { (finished: Bool) in  }
+                           animations: { self.iconSubview?.transform = self.isSelected ? CGAffineTransform.identity : CGAffineTransform(scaleX: 0.8, y: 0.8)},
+                           completion: { (finished: Bool) in }
             )
     }
         
