@@ -36,7 +36,7 @@ func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: 
             }
             
             if let json = try JSONSerialization.jsonObject(with: data) as? [Any] {
-                let forecast = try Forecast.init(fromWeatherProxy: json)
+                let forecast = try Forecast.init(fromWeatherProxy: json, overrideCoodinateWith: coord)
                 if(forecast.availableDays>0) {
                     completion(nil, forecast)
                     let endTime = DispatchTime.now()
