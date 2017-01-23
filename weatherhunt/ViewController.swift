@@ -27,6 +27,7 @@ extension Date {
 protocol ForecastDelegate {
     func onNewForecast(_ forecast: Forecast)
     func onSelectForecast(_ forecast: Forecast)
+    func onDeselectForecast()
 }
 
 class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate, DatePickerDelegate {
@@ -196,6 +197,7 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     }
     
     func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
+        self.forecastDelegate?.onDeselectForecast()
         if let annotations = mapView.annotations {
             let weatherAnnotations = annotations.flatMap({$0 as? WeatherAnnotation})
             for targetAn: WeatherAnnotation in weatherAnnotations  {
@@ -212,8 +214,13 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let weatherView = touch.view as? WeatherAnnotationView {
             Analytics.sendEvent(category: "Map", action: "Tap", label: "Existing Forecast", value: nil)
-            print("Ignore tap on existing annotation")
+            NSLog("Ignore tap on existing annotation")
             self.forecastDelegate?.onSelectForecast(weatherView.weatherAnnotation!.forecast)
+
+            // Not reccomended to call selectAnnotation and deselect dirctly, but there is a ~500ms delay when waiting for mapView to process it
+            mapView.selectedAnnotations.forEach({ self.mapView.deselectAnnotation($0, animated: true) })
+            mapView.selectAnnotation(weatherView.annotation!, animated: true)
+
             return false
         }
         return true
@@ -243,10 +250,6 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
         if let annotation = views[0].annotation {
             mapView.selectAnnotation(annotation, animated: true)
         }
-    }
-    
-    func mapView(_ mapView: MGLMapView, didSelect annotationView: MGLAnnotationView) {
-        
     }
 }
 

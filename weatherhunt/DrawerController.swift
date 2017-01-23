@@ -78,7 +78,23 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
     
     internal func onSelectForecast(_ forecast: Forecast) {
         currentForecast = forecast
+        if let drawer = self.parent as? PulleyViewController
+        {
+            if drawer.drawerPosition != .partiallyRevealed {
+                drawer.setDrawerPosition(position: .partiallyRevealed, animated: true)
+            }
+        }
         updateLabels()
+    }
+    
+    func onDeselectForecast() {
+        if let drawer = self.parent as? PulleyViewController
+        {
+            if drawer.drawerPosition == .partiallyRevealed {
+                drawer.setDrawerPosition(position: .collapsed, animated: true)
+            }
+        }
+
     }
 
     
