@@ -234,7 +234,6 @@ class ViewController: UIViewController, MGLMapViewDelegate, UIGestureRecognizerD
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         if let weatherAnnotation = annotation as? WeatherAnnotation {
             let annotationIdentifier = "weather-annotation"
-            // TODO: Test reusable annotation views
             if let existingView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) as? WeatherAnnotationView {
                 existingView.update(with: weatherAnnotation)
                 return existingView
