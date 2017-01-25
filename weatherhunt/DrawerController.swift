@@ -54,12 +54,14 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
             highTempLabel.text = "\(weather.tempHigh)°"
             lowTempLabel.text = "\(weather.tempLow)°"
             conditionImage.image = weather.imageLarge
+            conditionImage.isHidden = false
 
         }
         else {
-            conditionLabel.text = "Not yet available"
-            highTempLabel.text = ""
+            conditionLabel.text = "weather not found"
+            highTempLabel.text = "Sorry,"
             lowTempLabel.text = ""
+            conditionImage.isHidden = true
         }
     }
     
