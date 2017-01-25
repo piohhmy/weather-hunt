@@ -188,12 +188,12 @@ Maps by © Mapbox, © OpenStreetMap</string>
                                     <constraint firstAttribute="height" constant="40" id="Ohc-mX-tTm"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Mon"/>
-                                    <segment title="Tues"/>
-                                    <segment title="Wed"/>
-                                    <segment title="Thurs"/>
-                                    <segment title="Fri"/>
-                                    <segment title="Sat"/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                    <segment title=""/>
                                 </segments>
                                 <color key="tintColor" red="0.099022800381400114" green="0.72336632013320923" blue="0.44322953579242008" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
