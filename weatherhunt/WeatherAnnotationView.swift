@@ -67,25 +67,25 @@ class WeatherAnnotationView: MGLAnnotationView {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-        NSLog("Selected!")
+        NSLog("Selected: " + selected.description + " " + (self.weatherAnnotation?.title)!)
         super.setSelected(selected, animated: animated)
 
+        animateSelectedIcon(selected)
+    }
+    
+    func animateSelectedIcon(_ selected: Bool) {
         // Animate the border width in/out, creating an iris effect.
         let animation = CABasicAnimation(keyPath: "borderWidth")
         animation.duration = 0.1
         layer.borderWidth = selected ? 5 : 2
         layer.add(animation, forKey: "borderWidth")
         
-        animateSelectedIcon()
-    }
-    
-    func animateSelectedIcon() {
         UIView.animate(withDuration: 0.1,
                        delay: 0,
-                       usingSpringWithDamping: CGFloat(0),
+                       usingSpringWithDamping: CGFloat(1.0),
                        initialSpringVelocity: CGFloat(0),
                        options: UIViewAnimationOptions.allowUserInteraction,
-                       animations: { self.iconSubview?.transform = self.isSelected ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.8, y: 0.8) },
+                       animations: { self.iconSubview?.transform = selected ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.8, y: 0.8) },
                        completion: { (finished: Bool) in }
         )
     }
