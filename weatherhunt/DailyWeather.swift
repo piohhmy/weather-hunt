@@ -114,6 +114,7 @@ let conditionImages = [
     "Flurries Likely": ["small": #imageLiteral(resourceName: "Cloud-Snow"), "big": #imageLiteral(resourceName: "Cloud-Snow-big")],
     "Patchy Fog": ["small": #imageLiteral(resourceName: "Cloud-Fog-Sun"), "big": #imageLiteral(resourceName: "Cloud-Fog-Sun-big")],
     "Areas Fog": ["small": #imageLiteral(resourceName: "Cloud-Fog-Sun"), "big": #imageLiteral(resourceName: "Cloud-Fog-Sun-big")],
+    "Areas Ice Fog": ["small": #imageLiteral(resourceName: "Cloud-Fog-Sun"), "big": #imageLiteral(resourceName: "Cloud-Fog-Sun-big")],
     "Patchy Freezing Fog": ["small": #imageLiteral(resourceName: "Cloud-Fog"), "big": #imageLiteral(resourceName: "Cloud-Fog-big")],
     "Areas Freezing Fog": ["small": #imageLiteral(resourceName: "Cloud-Fog"), "big": #imageLiteral(resourceName: "Cloud-Fog-big")],
     "Patchy Smoke": ["small": #imageLiteral(resourceName: "Cloud-Fog-Sun"), "big": #imageLiteral(resourceName: "Cloud-Fog-Sun-big")],
