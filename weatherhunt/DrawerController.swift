@@ -96,6 +96,11 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
                 drawer.setDrawerPosition(position: .collapsed, animated: true)
             }
         }
+        conditionLabel.text = ""
+        highTempLabel.text = ""
+        lowTempLabel.text = ""
+        conditionImage.isHidden = true
+
 
     }
 
