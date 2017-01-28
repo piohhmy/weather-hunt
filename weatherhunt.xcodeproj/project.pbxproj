@@ -19,6 +19,7 @@
 		B51DA4D81E05BD7200FE6255 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DA4D71E05BD7200FE6255 /* DailyWeather.swift */; };
 		B523349E1E33D40D0034F4E1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B523349D1E33D40D0034F4E1 /* Settings.bundle */; };
 		B538DD751E1737E000036DD4 /* weatherProxyEmptyTestFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */; };
+		B53DD4761E3D2494002D5CCA /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58017881E1AFD99006C3279 /* Analytics.swift */; };
 		B55339951E16DBE0000FC2B6 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55339941E16DBE0000FC2B6 /* InfoViewController.swift */; };
 		B557904A1E216D4500086DED /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55790491E216D4500086DED /* Secret.plist */; };
 		B557904C1E21AE7C00086DED /* WeatherAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557904B1E21AE7C00086DED /* WeatherAnnotationView.swift */; };
@@ -538,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5B2FBF71E15ADCC0030875D /* WeatherAnnotation.swift in Sources */,
+				B53DD4761E3D2494002D5CCA /* Analytics.swift in Sources */,
 				B51D62E71E05C21B0076A089 /* DailyWeather.swift in Sources */,
 				B51DA4D21E04900000FE6255 /* Forecast.swift in Sources */,
 				B51DA4D41E0498BC00FE6255 /* ForecastTests.swift in Sources */,
@@ -724,10 +726,23 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = WH8UR4YUC6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Pulley\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/Google/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic\"",
+				);
 				INFOPLIST_FILE = weatherhuntTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hillcroft.weatherhuntTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = weatherhunt/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/weatherhunt.app/weatherhunt";
 			};
@@ -739,10 +754,23 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = WH8UR4YUC6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Pulley\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/Google/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic\"",
+				);
 				INFOPLIST_FILE = weatherhuntTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hillcroft.weatherhuntTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = weatherhunt/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/weatherhunt.app/weatherhunt";
 			};
