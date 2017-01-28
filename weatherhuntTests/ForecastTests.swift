@@ -89,4 +89,9 @@ class ForecastTests: XCTestCase {
         XCTAssert(forecast.availableDays == 0)
     }
     
+    func testOnDay_nullHighValue_returnsDailyWeatherWithEmptyHigh() {
+        let forecast = try! Forecast(fromWeatherProxy: createWeatherProxyFixture(resource: "weatherProxyNullHighTestFixture")!)
+        XCTAssert(forecast.availableDays == 6)
+    }
+    
 }

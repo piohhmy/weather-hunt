@@ -20,6 +20,7 @@
 		B523349E1E33D40D0034F4E1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B523349D1E33D40D0034F4E1 /* Settings.bundle */; };
 		B538DD751E1737E000036DD4 /* weatherProxyEmptyTestFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */; };
 		B53DD4761E3D2494002D5CCA /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58017881E1AFD99006C3279 /* Analytics.swift */; };
+		B53DD4781E3D2D75002D5CCA /* weatherProxyNullHighTestFixture.json in Resources */ = {isa = PBXBuildFile; fileRef = B53DD4771E3D2D75002D5CCA /* weatherProxyNullHighTestFixture.json */; };
 		B55339951E16DBE0000FC2B6 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55339941E16DBE0000FC2B6 /* InfoViewController.swift */; };
 		B557904A1E216D4500086DED /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55790491E216D4500086DED /* Secret.plist */; };
 		B557904C1E21AE7C00086DED /* WeatherAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557904B1E21AE7C00086DED /* WeatherAnnotationView.swift */; };
@@ -76,6 +77,7 @@
 		B51DA4D51E049DA700FE6255 /* weatherProxyTestFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherProxyTestFixture.json; sourceTree = "<group>"; };
 		B51DA4D71E05BD7200FE6255 /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
 		B523349D1E33D40D0034F4E1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		B53DD4771E3D2D75002D5CCA /* weatherProxyNullHighTestFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherProxyNullHighTestFixture.json; sourceTree = "<group>"; };
 		B55339941E16DBE0000FC2B6 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherProxyEmptyTestFixture.json; sourceTree = "<group>"; };
 		B55790491E216D4500086DED /* Secret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secret.plist; sourceTree = "<group>"; };
@@ -209,12 +211,13 @@
 		B5EFA4F01DF29FA800C313F9 /* weatherhuntTests */ = {
 			isa = PBXGroup;
 			children = (
-				B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */,
 				B5EFA4F11DF29FA800C313F9 /* weatherhuntTests.swift */,
 				B5EFA4F31DF29FA800C313F9 /* Info.plist */,
 				B51DA4D31E0498BC00FE6255 /* ForecastTests.swift */,
-				B51DA4D51E049DA700FE6255 /* weatherProxyTestFixture.json */,
 				B51D63031E062D070076A089 /* WeatherAnnotationTests.swift */,
+				B51DA4D51E049DA700FE6255 /* weatherProxyTestFixture.json */,
+				B55339981E173758000FC2B6 /* weatherProxyEmptyTestFixture.json */,
+				B53DD4771E3D2D75002D5CCA /* weatherProxyNullHighTestFixture.json */,
 			);
 			path = weatherhuntTests;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B538DD751E1737E000036DD4 /* weatherProxyEmptyTestFixture.json in Resources */,
+				B53DD4781E3D2D75002D5CCA /* weatherProxyNullHighTestFixture.json in Resources */,
 				B51DA4D61E049DA700FE6255 /* weatherProxyTestFixture.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
