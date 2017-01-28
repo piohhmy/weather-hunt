@@ -12,11 +12,13 @@ import MapKit
 
 
 func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: String?, _ forecast: Forecast? ) -> Void) {
+    var endpoint = ""
+    if let path = Bundle.main.path(forResource: "Info", ofType: "plist"), let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
+        endpoint = dict["WeatherHuntEndpoint"] as! String
+    }
     let startTime = DispatchTime.now()
-    let base = "https://bh6cj0clm5.execute-api.us-west-2.amazonaws.com/"
-    let resource = "dev/weather/forecast"
     let queryparams = "?lat=\(coord.latitude)&lng=\(coord.longitude)"
-    var request = URLRequest(url: URL(string: base+resource+queryparams)!)
+    var request = URLRequest(url: URL(string: endpoint+queryparams)!)
     request.httpMethod = "GET"
     let session = URLSession.shared
     print(request)

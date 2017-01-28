@@ -33,7 +33,7 @@ class Forecast {
         return dailyWeather.count
     }
     
-    init(fromWeatherProxy response:[Any], overrideCoodinateWith coord:CLLocationCoordinate2D?) throws {
+    init(fromWeatherProxy response:[Any], overrideCoodinateWith coord:CLLocationCoordinate2D?=nil) throws {
         guard let jsonObj = response.first as? [String: Any] else {
          throw SerializationError.missing("forecast")
         }
