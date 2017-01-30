@@ -60,18 +60,16 @@ class Forecast {
             guard let weatherDetails = weather as? [String: Any] else {
                 throw SerializationError.missing("daily_weather")
             }
-            guard let tempHigh = weatherDetails["high"] as? Int,
-                let tempLow = weatherDetails["low"] as? Int,
-                let condition = weatherDetails["condition"] as? String
-                else {
-                    throw SerializationError.missing("daily_weather entry")
-            }
-            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             guard let date = dateFormatter.date(from: dateStr) else {
                 throw SerializationError.invalid("date", dateStr)
             }
+
+            let tempHigh = weatherDetails["high"] as? Int
+            let tempLow = weatherDetails["low"] as? Int
+            let condition = weatherDetails["condition"] as? String
+            
             forecasts.append(DailyWeather.init(tempHigh: tempHigh, tempLow: tempLow, condition: condition, date: date, coordinate:self.location))
         }
         self.dailyWeather = forecasts.sorted{ $0.date < $1.date}

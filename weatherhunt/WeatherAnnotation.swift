@@ -30,8 +30,10 @@ class WeatherAnnotation: MGLPointAnnotation {
     func switchTo(day: Int)  {
         if let weather = try? forecast.on(day: day) {
             self.image = weather.imageSmall
-            self.title = weather.condition
-            self.subtitle = "High: \(weather.tempHigh) Low: \(weather.tempLow)"
+            self.title = weather.condition ?? ""
+            let high = (weather.tempHigh != nil) ? String(weather.tempHigh!) : ""
+            let low = (weather.tempLow != nil) ? String(weather.tempLow!) : ""
+            self.subtitle = "High: \(high) Low: \(low)"
             if (self.image == nil) {
                 Analytics.sendException(description: "No image for \(weather.condition)", isFatal: false)
             }

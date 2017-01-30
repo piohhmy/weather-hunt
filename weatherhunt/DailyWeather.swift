@@ -10,19 +10,25 @@ import Foundation
 import MapKit
 
 struct DailyWeather {
-    let tempHigh: Int
-    let tempLow: Int
-    let condition: String
+    let tempHigh: Int?
+    let tempLow: Int?
+    let condition: String?
     let date: Date
     let coordinate: CLLocationCoordinate2D
     var imageSmall: UIImage? {
         get {
-            return conditionImages[self.condition]?["small"]
+            guard let cond = self.condition else {
+                return nil
+            }
+            return conditionImages[cond]?["small"]
         }
     }
     var imageLarge: UIImage? {
         get {
-            return conditionImages[self.condition]?["big"]
+            guard let cond = self.condition else {
+                return nil
+            }
+            return conditionImages[cond]?["big"]
         }
     }
 }
