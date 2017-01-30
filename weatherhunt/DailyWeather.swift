@@ -17,18 +17,22 @@ struct DailyWeather {
     let coordinate: CLLocationCoordinate2D
     var imageSmall: UIImage? {
         get {
-            guard let cond = self.condition else {
-                return nil
-            }
-            return conditionImages[cond]?["small"]
+            guard
+                let cond = self.condition,
+                let img = conditionImages[cond] else {
+                    return #imageLiteral(resourceName: "Moon-New")
+                }
+            return img["small"]
         }
     }
     var imageLarge: UIImage? {
         get {
-            guard let cond = self.condition else {
-                return nil
-            }
-            return conditionImages[cond]?["big"]
+            guard
+                let cond = self.condition,
+                let img = conditionImages[cond] else {
+                    return #imageLiteral(resourceName: "Moon-New-big")
+                }
+            return img["big"]
         }
     }
 }
