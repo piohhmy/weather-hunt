@@ -51,8 +51,8 @@ class DrawerController: UIViewController, ForecastDelegate, PulleyDrawerViewCont
     func updateLabels() {
         if let weather = try? currentForecast!.on(day: datePicker.selectedSegmentIndex) {
             conditionLabel.text = weather.condition
-            highTempLabel.text = "\(weather.tempHigh)°"
-            lowTempLabel.text = "\(weather.tempLow)°"
+            highTempLabel.text =  (weather.tempHigh != nil) ? "\(weather.tempHigh!)°" : "n/a"
+            lowTempLabel.text =  (weather.tempLow != nil) ? "\(weather.tempLow!)°" : "n/a"
             conditionImage.image = weather.imageLarge
             conditionImage.isHidden = false
 
