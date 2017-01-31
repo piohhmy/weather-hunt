@@ -19,6 +19,7 @@ func getWeatherFor(coord: CLLocationCoordinate2D, completion: @escaping (_ err: 
     let startTime = DispatchTime.now()
     let queryparams = "?lat=\(coord.latitude)&lng=\(coord.longitude)"
     var request = URLRequest(url: URL(string: endpoint+queryparams)!)
+    request.addValue("application/vnd.weatherhunt.v2+json", forHTTPHeaderField: "Accept")
     request.httpMethod = "GET"
     let session = URLSession.shared
     print(request)
