@@ -44,6 +44,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>WeatherHuntEndpoint</key>
-	<string>https://0dbfd7x3wh.execute-api.us-west-2.amazonaws.com/test/weather/forecast</string>
+	<string>https://bh6cj0clm5.execute-api.us-west-2.amazonaws.com/dev/weather/forecast</string>
 </dict>
 </plist>

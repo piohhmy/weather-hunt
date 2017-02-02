@@ -51,15 +51,18 @@ class Forecast {
         
         var forecasts: [DailyWeather] = []
 
-        guard let dailyWeather = jsonObj["daily_weather"] as? [String: Any] else {
+        guard let dailyWeather = jsonObj["daily_weather"] as? [Any] else {
             throw SerializationError.missing("daily_weather")
         }
         
-        for (day, weather) in dailyWeather {
-            let dateStr = day
-            guard let weatherDetails = weather as? [String: Any] else {
+        for day in dailyWeather {
+            guard let weatherDetails = day as? [String: Any] else {
                 throw SerializationError.missing("daily_weather")
             }
+            guard let dateStr = weatherDetails["date"] as? String else {
+                throw SerializationError.missing("date")
+            }
+
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             guard let date = dateFormatter.date(from: dateStr) else {
