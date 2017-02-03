@@ -55,7 +55,7 @@ class Forecast {
             throw SerializationError.missing("daily_weather")
         }
         
-        for day in dailyWeather {
+        for (index, day) in dailyWeather.enumerated() {
             guard let weatherDetails = day as? [String: Any] else {
                 throw SerializationError.missing("daily_weather")
             }
@@ -73,9 +73,31 @@ class Forecast {
             let tempLow = weatherDetails["low"] as? Int
             let condition = weatherDetails["condition"] as? String
             
-            forecasts.append(DailyWeather.init(tempHigh: tempHigh, tempLow: tempLow, condition: condition, date: date, coordinate:self.location))
+            if (tempHigh == nil) {
+                reportMissing("high", atIndex: index)
+            }
+            if (tempLow == nil) {
+                reportMissing("low", atIndex: index)
+            }
+            if (condition == nil) {
+                reportMissing("condition", atIndex: index)
+            }
+            
+            
+            let dailyWeather = DailyWeather.init(tempHigh: tempHigh, tempLow: tempLow, condition: condition, date: date, coordinate:self.location)
+            if let cond = condition {
+                if !dailyWeather.imgFound  {
+                    Analytics.sendException(description: "No image for \(cond)", isFatal: false)
+                }
+            }
+            
+            forecasts.append(dailyWeather)
         }
         self.dailyWeather = forecasts.sorted{ $0.date < $1.date}
+    }
+    
+    func reportMissing(_ dataPoint: String, atIndex index: Int) {
+        Analytics.sendEvent(category: "API", action: "Missing Data Point", label: "\(dataPoint)-\(index)", value: nil)
     }
     
     func on(day:Int) throws -> DailyWeather {

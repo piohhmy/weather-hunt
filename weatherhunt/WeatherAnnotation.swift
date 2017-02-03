@@ -34,9 +34,6 @@ class WeatherAnnotation: MGLPointAnnotation {
             let high = (weather.tempHigh != nil) ? String(weather.tempHigh!) : ""
             let low = (weather.tempLow != nil) ? String(weather.tempLow!) : ""
             self.subtitle = "High: \(high) Low: \(low)"
-            if (self.image == nil) {
-                Analytics.sendException(description: "No image for \(weather.condition)", isFatal: false)
-            }
         }
         else {
             self.image = nil
